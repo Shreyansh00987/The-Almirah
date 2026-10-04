@@ -73,9 +73,11 @@ I will take that as the highest possible code review.
 
 ## Demo
 
-- 🌐 **Live Cloud Demo**: [https://the-almirah.onrender.com](https://the-almirah.onrender.com) *(Free tier: spins down on inactivity, takes ~50s to wake up on first load)*
-- 🎬 **1-Minute Walkthrough Video (with AI Voice)**: [Watch on GitHub](https://github.com/Shreyansh00987/The-Almirah/raw/main/public/The_Almirah_1Min_Demo.mp4)
-- 🖥️ **Offline Local Host**: Ready to clone and run on any air-gapped laptop (`http://localhost:3001`)
+{% youtube qkjj2PO7gig %}
+
+- 🎬 **YouTube 1-Minute Walkthrough**: [https://youtu.be/qkjj2PO7gig](https://youtu.be/qkjj2PO7gig) *(1080p 60fps with clear voiceover walkthrough)*
+- 🌐 **Live Cloud Demo**: [https://the-almirah.onrender.com](https://the-almirah.onrender.com) *(Hosted on Render free tier; spins down on inactivity, takes ~50s to wake up on first visit)*
+- 🖥️ **Offline Local Host**: Clone and run with zero internet (`http://localhost:3001`)
 
 ### What the 1-Minute Demo Shows:
 1. **Interactive 3D Cabinet**: Real Three.js walnut almirah with dynamic drawer open/close animations and urgency glow shaders.
@@ -172,6 +174,22 @@ Commercial LLMs charge subscription tiers and per-token API fees. For a family a
 
 ### 4. Air-Gapped Resiliency
 When severe monsoon storms knock out home internet or cellular towers, closed APIs become useless white error screens. The Almirah runs on a battery-powered laptop in airplane mode with 100% functionality.
+
+---
+
+## My Agent Session
+
+This project was conceptualized, architected, and built alongside Google DeepMind's **Antigravity** coding agent. The complete commit history, prompt logs, and step-by-step design decisions are documented openly in the repository:
+- 📖 **Build Log**: [docs/BUILD_LOG.md](https://github.com/Shreyansh00987/The-Almirah/blob/main/docs/BUILD_LOG.md)
+- 🏗️ **Architecture Spec**: [docs/ARCHITECTURE.md](https://github.com/Shreyansh00987/The-Almirah/blob/main/docs/ARCHITECTURE.md)
+- 📊 **Evaluation Benchmarks**: [docs/EVAL.md](https://github.com/Shreyansh00987/The-Almirah/blob/main/docs/EVAL.md)
+
+---
+
+## Prize Categories
+
+- 🏆 **Hacktoberfest Weekend Challenge: Build for a Friend** (Grand Prize)
+- 🌟 **Open-Source AI & Local Inference Track**
 
 ---
 
