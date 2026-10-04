@@ -4,6 +4,45 @@
 
 ---
 
+## 🌟 Weekend Hackathon: Built for a Friend (Dad)
+
+> *"Ship something that solves a real problem for a friend or someone you love. Pick one real person and build something for them."*
+
+### Who it was built for
+**Rajesh Sharma (Dad)**, an older adult who for over 35 years has kept every land registry, mediclaim schedule, vehicle insurance policy, and appliance warranty card locked in a heavy double-door Godrej almirah (wardrobe) in his study.
+
+### The Real Problem
+Every year, a deadline would slip past—a car insurance renewal lapsed by 10 days, or a warranty booklet went missing right when the water purifier broke down. Digging through tied bundles of yellowing paper with reading glasses was becoming an anxious chore. 
+
+Yet, when introduced to digital cloud apps (Google Drive, DigiLocker, cloud document managers), **Dad categorically refused**:
+> *"Why should an overseas company or an AI cloud server hold my property survey deed, my chassis number, and my family health history just so I can remember when to pay the tax? No stranger on the internet needs to see my papers."*
+
+### The Handover & What Dad Said
+When handed the laptop running The Almirah with his documents pre-filed into his familiar wooden drawers, he asked: *"When does my car insurance expire?"* 
+The app immediately responded with the exact date and pulled up the original certificate with the policy period highlighted in gold.
+
+Dad's reaction:
+> **"You made a computer look like my almirah. I asked it 'When does my car insurance expire?' and it didn't just give a date—it showed me the exact line on the original certificate. And it didn't ask for a password or internet. This I will use."**
+
+---
+
+## 💡 Why Open Innovation Matters for The Almirah
+
+This project could not exist on closed, proprietary cloud APIs:
+
+1. **Strict Zero-Cloud Privacy (Data Sovereignty)**:
+   Sensitive family papers (Aadhaar, tax receipts, vehicle RC, medical history) must never leave the user's physical machine. By running **Qwen2.5-VL** (vision OCR) and **Qwen2.5 / Qwen3** (JSON schema extraction) locally through **Ollama**, zero bytes leave the laptop.
+2. **True Air-Gapped / Offline Operation**:
+   The entire application runs on a laptop in the middle of nowhere with no internet connection. Fonts, models, vector embeddings, and storage are 100% self-hosted.
+3. **Zero Recurring API Costs**:
+   Closed LLM APIs charge per token and per image. For a family archiving dozens of multi-page documents over decades, open-weight models cost exactly \$0.00 to run forever on existing laptop hardware.
+4. **Model Swappability & Sovereignty**:
+   Using open standards (Ollama, SQLite, ONNX), the user is never locked into a single proprietary vendor. Model names are configurable in a single `.env` file (`TEXT_MODEL_NAME`, `VISION_MODEL_NAME`, `EMBEDDING_MODEL_NAME`), allowing the pipeline to seamlessly upgrade as open-weight models evolve.
+5. **Grounded Proof Over Hallucinatory Black Boxes**:
+   Closed chatbot APIs frequently hallucinate dates and policy clauses. The Almirah enforces strict JSON schema constraints and a zero-guess guardrail: if a fact is not in the documents, it strictly refuses to answer.
+
+---
+
 ## 1. What It Does
 
 **The Almirah** is an offline digital sanctuary for critical family paper documents (insurance policies, vehicle registrations, property tax receipts, warranty cards, identity papers). 
