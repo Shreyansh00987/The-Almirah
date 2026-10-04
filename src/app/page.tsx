@@ -19,7 +19,7 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
   const [viewMode, setViewMode] = useState<'3d' | 'list'>('3d');
   const [selectedDoc, setSelectedDoc] = useState<DocumentRecord | null>(null);
-  const [activeDrawerIndex, setActiveDrawerIndex] = useState<number | null>(0); // Default open Drawer I (Insurance) to show immediate depth
+  const [activeDrawerIndex, setActiveDrawerIndex] = useState<number | null>(null);
   const [isStoryOpen, setIsStoryOpen] = useState(false);
 
   useEffect(() => {

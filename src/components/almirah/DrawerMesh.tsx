@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { RoundedBox } from '@react-three/drei';
+import { RoundedBox, Html } from '@react-three/drei';
 import * as THREE from 'three';
 import { DrawerSummary, DeadlineUrgency, DocumentRecord } from '@/lib/types';
 
@@ -157,6 +157,13 @@ export const DrawerMesh: React.FC<DrawerMeshProps> = ({
             <meshStandardMaterial color="#916F35" metalness={0.9} roughness={0.3} />
           </mesh>
         ))}
+
+        {/* Crisp Engraved Brass Nameplate Title */}
+        <Html position={[0, 0, 0.016]} center transform scale={0.075} style={{ pointerEvents: 'none' }}>
+          <div className="font-serif font-black tracking-widest text-[#241708] uppercase text-[11px] select-none text-center whitespace-nowrap">
+            {romanNumerals[index]}. {summary.drawer}
+          </div>
+        </Html>
       </group>
 
       {/* Physical 3D Urgency Status Jewel (Embedded cabochon gem beside the label) */}
