@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-10-04T17:31:23.033Z",
+        "reason": "Pinned in project specification for elder accessibility"
+      }
+    ]
+  }
+}

@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   Self-Hosted Offline Fonts: Source Serif 4 & Inter
+   Zero external network calls.
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('/fonts/source-serif-4-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('/fonts/source-serif-4-latin-600-normal.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Source Serif 4';
+  src: url('/fonts/source-serif-4-latin-700-normal.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter-latin-500-normal.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter-latin-600-normal.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter-latin-700-normal.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-source-serif: 'Source Serif 4', Georgia, serif;
+  --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  --bg-slate-deep: #12151A;
+  --bg-slate-panel: #1B2028;
+  --bg-slate-elevated: #242A35;
+  --border-slate: #2E3644;
+  
+  --walnut-dark: #4A3323;
+  --walnut-warm: #6B4A33;
+  --walnut-highlight: #8B6143;
+  --brass: #C8A265;
+  
+  --paper-parchment: #F1ECE2;
+  --paper-light: #FBF9F5;
+  --paper-ink: #1F242C;
+  --paper-muted: #545D6E;
+  
+  --urgency-calm: #5A677D;
+  --urgency-amber: #E0A13A;
+  --urgency-red: #C8453B;
+}
+
+html, body {
+  background-color: var(--bg-slate-deep);
+  color: var(--paper-parchment);
+  font-family: var(--font-inter);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Wood Grain Texture Overlay (CSS SVG gradient pattern) */
+.wood-texture {
+  background-color: #6B4A33;
+  background-image: linear-gradient(90deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.08) 50%, rgba(255,255,255,0.02) 100%),
+                    repeating-linear-gradient(180deg, transparent 0, transparent 4px, rgba(0,0,0,0.04) 4px, rgba(0,0,0,0.04) 8px);
+}
+
+.slate-card {
+  background-color: #171B21;
+  border: 1px solid #2E3644;
+  border-radius: 0.5rem;
+}
+
+/* High contrast focus ring for elder accessibility */
+:focus-visible {
+  outline: 3px solid #E0A13A;
+  outline-offset: 2px;
+}
+
+/* Custom sleek dark scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #12151A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2E3644;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #455064;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
