@@ -1,0 +1,63 @@
+# The Almirah — Engineering & Design Build Log
+
+This running log captures technical architecture decisions, trade-offs, bug fixes, and milestone completions throughout the development of The Almirah.
+
+---
+
+### [2026-10-04] — Inception, Architecture & Initial Setup
+- **Decision 1: Zero External Calls & Self-Hosted Assets**
+  - All fonts (Source Serif 4, Inter) are bundled locally as static WOFF2 files in `public/fonts/`.
+  - A runtime offline monitor is implemented with Content Security Policy headers restricting outbound calls exclusively to `'self'` and local backend ports (`localhost:8000`, `localhost:11434`).
+  - Active visual indicator shows offline status backed by code verification.
+- **Decision 2: Dual Mode Architecture (Live vs Demo)**
+  - In Live mode: Backend processes real image uploads via FastAPI, Ollama (Qwen2.5-VL + Qwen2.5 + BGE-M3), and SQLite with vector similarity.
+  - In Demo mode: A standalone pre-computed engine serves 9 synthetic documents with full bounding boxes, verification flow, interactive 3D cabinet, and semantic search citations. This guarantees zero-dependency preview on deployment hosts (Vercel) while maintaining identical schemas and UI components.
+- **Decision 3: Impeccable Design System Direction**
+  - Follows "quiet, trustworthy, wood-and-slate" palette:
+    - Slate `#12151A` (primary dark frame)
+    - Walnut `#6B4A33` (cabinet carcass and drawer fronts)
+    - Paper `#F1ECE2` (document canvas and high-readability text cards)
+    - Amber `#E0A13A` (subtle impending deadline glow)
+    - Signal Red `#C8453B` (urgent/overdue alert)
+  - Typography tuned for high contrast and elder-friendly legibility.
+- **Decision 4: Strict JSON Schema Extraction & Grounding**
+  - Extraction pipeline requires JSON schema output with mandatory fields: `document_type`, `provider`, `identifier`, `issue_date`, `expiry_date`, `amount`, `drawer`, and `bounding_boxes` with confidence scores.
+  - No extracted date is committed to the database or deadlines list until user verifies and confirms on the verification screen.
+
+---
+
+### [2026-10-04] — Pipeline Implementation & Key Challenges Solved
+
+#### Problem 1: Preventing RAG Hallucinations on Stopwords & Ambiguous Entities
+- **Issue**: When querying `"What is my passport number?"` against a corpus containing no passport, the keyword `"number"` falsely matched the `"Identifier / Policy No"` field of health insurance, returning an ungrounded result.
+- **Root Cause**: Intent keywords (`number`, `id`, `date`, `when`) were being boosted without verifying that at least one substantive subject token (`passport`) existed in the candidate document or metadata.
+- **Solution**: Implemented a two-tier token filter in `backend/pipeline/rag.py`. A candidate document MUST intersect with the user's substantive subject terms (`q_tokens - GENERIC_STOPWORDS`). If zero subject terms match, candidate score is strictly 0.0, triggering the explicit fallback: *"The uploaded documents in your Almirah do not contain information regarding your query. No guesses are made."* Verified with automated test suite.
+
+#### Problem 2: Port Collision & Multi-Port Local Environment
+- **Issue**: Port 3000 was held by another background Node service on the machine, causing `EADDRINUSE`.
+- **Solution**: Configured Next.js to start cleanly on port 3001 (`-p 3001`), and updated `backend/config.py` `ALLOWED_ORIGINS` to accept both 3000 and 3001.
+
+#### Problem 3: Impeccable Design Review & Craft Pass
+- **Action**: Ran `impeccable detect src` across all UI and component files.
+- **Findings**:
+  1. `Header.tsx`: Detected `animate-bounce` on the upload button. Replaced with smooth, dignified scanning pulse (`animate-pulse`) adhering to real physical deceleration principles.
+  2. `globals.css`: Flagged `overused-font` on `Inter`. Per project brief requirements for older-adult readability, confirmed and documented ignore in `.impeccable/config.json` using `impeccable ignores add-value`.
+- **Outcome**: `impeccable detect src` runs clean with 0 anti-patterns or defects.
+
+#### Problem 4: Physical 3D Cabinet & Accessible List Parity
+- **Implementation**: Created the 3D walnut Almirah using React Three Fiber (`@react-three/fiber` & `@react-three/drei`).
+- **Feature**: Drawers slide forward along $z$ axis with physical spring easing. Opening a drawer reveals physical cream paper folder tabs. The drawer rim glows Signal Red (<30 days / overdue), Amber (30–90 days), or Calm Slate (>90 days).
+- **Parity**: Built `AlmirahListView.tsx` as a 100% accessible fallback with full keyboard support and screen reader landmarks.
+
+---
+
+### [2026-10-04] — Final Verification & Milestone Summary
+- [x] Milestone (a): Skeleton + Config + Local Model Check
+- [x] Milestone (b): Extraction Pipeline with Schema Validation & Fast Fallback
+- [x] Milestone (c): Side-by-side Verify Screen with Bounding Box Hover
+- [x] Milestone (d): 3D Almirah Cabinet + Accessible List Fallback
+- [x] Milestone (e): Ask Semantic Search with Clickable Grounded Citations
+- [x] Milestone (f): Demo Mode with 9 Realistic Synthetic Documents
+- [x] Milestone (g): Impeccable Design Polish & Audit Pass
+- [x] Milestone (h): Accessibility (WCAG AAA) & Zero-Call Network Guard
+- [x] Milestone (i): Technical Documentation & Evaluation Benchmark
