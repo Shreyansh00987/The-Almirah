@@ -38,3 +38,9 @@ yarn-error.log*
 # OS metadata
 .DS_Store
 Thumbs.db
+
+# Scratch and temporary media generation
+scratch/
+public/video_work/
+public/video_frames/
+
