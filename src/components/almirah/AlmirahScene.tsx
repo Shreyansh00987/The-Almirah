@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { ContactShadows } from '@react-three/drei';
 import * as THREE from 'three';
 import { DrawerSummary, DocumentRecord } from '@/lib/types';
 import { CabinetMesh } from './CabinetMesh';
@@ -17,24 +18,24 @@ function CameraRig({ openedDrawerIndex, drawerYPositions }: CameraRigProps) {
   const targetLookAt = useRef(new THREE.Vector3(0, 0, 0));
 
   useFrame((state, delta) => {
-    // Subtle mouse parallax (limited to small degrees for comfort)
-    const parallaxX = mouse.x * 0.35;
-    const parallaxY = mouse.y * 0.25;
+    // Subtle, elder-friendly mouse parallax (gentle movement)
+    const parallaxX = mouse.x * 0.4;
+    const parallaxY = mouse.y * 0.28;
 
-    let targetY = 0;
-    let targetZ = 6.2;
+    let targetY = 0.05;
+    let targetZ = 6.4;
 
     if (openedDrawerIndex !== null) {
-      targetY = drawerYPositions[openedDrawerIndex] * 0.7;
-      targetZ = 5.2; // Camera pulls focus inward toward open drawer
+      targetY = (drawerYPositions[openedDrawerIndex] ?? 0) * 0.75 + 0.1;
+      targetZ = 5.1; // Smooth focal pull toward open drawer
     }
 
-    camera.position.x = THREE.MathUtils.lerp(camera.position.x, parallaxX, delta * 3.0);
-    camera.position.y = THREE.MathUtils.lerp(camera.position.y, targetY + parallaxY, delta * 3.0);
-    camera.position.z = THREE.MathUtils.lerp(camera.position.z, targetZ, delta * 3.0);
+    camera.position.x = THREE.MathUtils.lerp(camera.position.x, parallaxX, delta * 3.2);
+    camera.position.y = THREE.MathUtils.lerp(camera.position.y, targetY + parallaxY, delta * 3.2);
+    camera.position.z = THREE.MathUtils.lerp(camera.position.z, targetZ, delta * 3.2);
 
-    const targetYLook = openedDrawerIndex !== null ? drawerYPositions[openedDrawerIndex] * 0.5 : 0;
-    targetLookAt.current.y = THREE.MathUtils.lerp(targetLookAt.current.y, targetYLook, delta * 4.0);
+    const targetYLook = openedDrawerIndex !== null ? (drawerYPositions[openedDrawerIndex] ?? 0) * 0.5 : 0;
+    targetLookAt.current.y = THREE.MathUtils.lerp(targetLookAt.current.y, targetYLook, delta * 4.2);
     camera.lookAt(targetLookAt.current);
   });
 
@@ -52,7 +53,7 @@ export const AlmirahScene: React.FC<AlmirahSceneProps> = ({
   onSelectDocument,
   activeDrawerName,
 }) => {
-  // Y positions for the 5 drawers
+  // Y positions for the 5 drawers with precise architectural spacing
   const drawerYPositions = [1.5, 0.75, 0.0, -0.75, -1.5];
   const [openedIndex, setOpenedIndex] = useState<number | null>(null);
 
@@ -64,7 +65,7 @@ export const AlmirahScene: React.FC<AlmirahSceneProps> = ({
     }
   }, [activeDrawerName, drawers]);
 
-  // Keyboard accessibility: Escape closes, Up/Down changes drawer
+  // Full keyboard accessibility: Esc to close, Arrow keys to navigate
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -82,27 +83,34 @@ export const AlmirahScene: React.FC<AlmirahSceneProps> = ({
   return (
     <div className="w-full h-full relative select-none">
       <Canvas
-        camera={{ position: [0, 0, 6.2], fov: 42 }}
+        camera={{ position: [0, 0, 6.4], fov: 40 }}
         className="w-full h-full"
         onPointerMissed={() => setOpenedIndex(null)}
       >
-        <color attach="background" args={['#12151A']} />
+        <color attach="background" args={['#101317']} />
         
-        {/* Soft Key Light */}
+        {/* Warm Golden Key Light (Simulating soft afternoon study light) */}
         <directionalLight
-          position={[4, 6, 5]}
-          intensity={1.8}
-          color="#FFF8EE"
+          position={[4.5, 6.0, 5.5]}
+          intensity={1.9}
+          color="#FFF4E6"
         />
 
-        {/* Ambient Fill Light */}
-        <ambientLight intensity={0.65} color="#455064" />
+        {/* Soft Slate Ambient Fill (Prevents harsh shadows) */}
+        <ambientLight intensity={0.7} color="#45546C" />
 
-        {/* Soft Backlight for Depth */}
-        <pointLight position={[0, -2, -3]} intensity={0.5} color="#6B4A33" />
+        {/* Subtle Slate Rim Light from the Left (Separates dark wood from background) */}
+        <directionalLight
+          position={[-5.0, 3.0, 2.0]}
+          intensity={0.65}
+          color="#6E88AC"
+        />
 
-        {/* Subtle warm accent light over cabinet face */}
-        <pointLight position={[0, 2, 3]} intensity={0.8} color="#E0A13A" />
+        {/* Warm Low Floor Bounce */}
+        <pointLight position={[0, -2.8, 1.5]} intensity={0.6} color="#6B4A33" />
+
+        {/* Warm Golden Front Accent */}
+        <pointLight position={[0, 1.8, 3.2]} intensity={0.9} color="#E0A13A" />
 
         {/* Camera Parallax and Focus Rig */}
         <CameraRig
@@ -110,10 +118,10 @@ export const AlmirahScene: React.FC<AlmirahSceneProps> = ({
           drawerYPositions={drawerYPositions}
         />
 
-        {/* 3D Walnut Cabinet Carcass */}
+        {/* Handcrafted Walnut Cabinet Carcass */}
         <CabinetMesh />
 
-        {/* 5 Stacked Drawers */}
+        {/* 5 Stacked Drawers with Physical Glides & Deadline Seam Glows */}
         {drawers.map((summary, idx) => (
           <DrawerMesh
             key={summary.drawer}
@@ -125,6 +133,16 @@ export const AlmirahScene: React.FC<AlmirahSceneProps> = ({
             onSelectDocument={onSelectDocument}
           />
         ))}
+
+        {/* Ultra-Soft Realistic Ground Contact Shadows */}
+        <ContactShadows
+          position={[0, -2.42, 0]}
+          opacity={0.82}
+          scale={10.5}
+          blur={2.4}
+          far={4.5}
+          color="#06080A"
+        />
       </Canvas>
     </div>
   );

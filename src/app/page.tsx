@@ -6,9 +6,10 @@ import { DrawerSummary, DocumentRecord } from '@/lib/types';
 import { AlmirahScene } from '@/components/almirah/AlmirahScene';
 import { AlmirahListView } from '@/components/almirah/AlmirahListView';
 import { DocumentModal } from '@/components/common/DocumentModal';
+import { BuiltForDadModal } from '@/components/common/BuiltForDadModal';
 import { 
   Box, List, Shield, Clock, AlertCircle, 
-  HelpCircle, Sparkles, FolderArchive, ArrowRight 
+  HelpCircle, Sparkles, FolderArchive, ArrowRight, Heart 
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -28,6 +29,8 @@ export default function HomePage() {
     loadData();
   }, []);
 
+  const [isStoryOpen, setIsStoryOpen] = useState(false);
+
   const totalDocs = drawers.reduce((acc, d) => acc + d.total_documents, 0);
   const urgentCount = drawers.filter(d => d.urgency === 'red').length;
   const amberCount = drawers.filter(d => d.urgency === 'amber').length;
@@ -38,11 +41,21 @@ export default function HomePage() {
       <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-4 pb-2">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
           <div>
-            <h1 className="font-serif text-3xl font-bold text-paper-light tracking-tight">
-              The Almirah
-            </h1>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Physical cabinet metaphor where drawer glow encodes verified deadline urgency.
+            <div className="flex items-center space-x-2.5">
+              <h1 className="font-serif text-3xl font-bold text-paper-light tracking-tight">
+                The Almirah
+              </h1>
+              <button
+                onClick={() => setIsStoryOpen(true)}
+                className="flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-walnut-900/80 border border-walnut-500/70 text-amber-300 hover:text-white hover:bg-walnut-800 text-[11px] font-semibold transition-all shadow-sm cursor-pointer"
+                title="Read the Hackathon Story: Built for Dad"
+              >
+                <Heart className="w-3.5 h-3.5 text-amber-400 fill-amber-400/40" />
+                <span>Built for Dad</span>
+              </button>
+            </div>
+            <p className="text-xs text-slate-400 mt-1">
+              Physical cabinet metaphor where drawer glow encodes verified deadline urgency. 100% local open AI.
             </p>
           </div>
 
@@ -172,6 +185,12 @@ export default function HomePage() {
       <DocumentModal
         document={selectedDoc}
         onClose={() => setSelectedDoc(null)}
+      />
+
+      {/* Built For Dad Story Modal */}
+      <BuiltForDadModal
+        isOpen={isStoryOpen}
+        onClose={() => setIsStoryOpen(false)}
       />
     </div>
   );

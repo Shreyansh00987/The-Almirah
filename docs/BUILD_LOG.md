@@ -49,6 +49,17 @@ This running log captures technical architecture decisions, trade-offs, bug fixe
 - **Feature**: Drawers slide forward along $z$ axis with physical spring easing. Opening a drawer reveals physical cream paper folder tabs. The drawer rim glows Signal Red (<30 days / overdue), Amber (30–90 days), or Calm Slate (>90 days).
 - **Parity**: Built `AlmirahListView.tsx` as a 100% accessible fallback with full keyboard support and screen reader landmarks.
 
+#### Problem 5: Elevating 3D Visual Craft & Challenge Alignment ("Build for a Friend")
+- **Visual Elevation**:
+  - Replaced basic rectangular geometry with chamfered `RoundedBox` wooden drawer fronts and walnut casing.
+  - Added authentic antique hardware: brass drawer pulls, circular escutcheons with stamped keyholes, and an engraved brass dedication plaque (`"SHARMA RESIDENCE — ESTD. 1989"`).
+  - Integrated `@react-three/drei` `ContactShadows` beneath the cabinet for realistic ground contact occlusion.
+  - Implemented multi-point studio lighting: warm tungsten key light (`#fef3c7`), cool slate fill (`#38bdf8`), subtle rim light, and functional drawer urgency glow.
+  - Integrated 3D HTML status pills and fanned cream paper folder tabs inside drawers.
+- **Challenge Alignment ("Build for Dad")**:
+  - Added dedicated story modal articulating the "Build for a Friend" narrative: Dad (Rajesh Sharma) kept family documents in a physical Godrej almirah for 35 years and refused cloud storage.
+  - Framed why open-source AI is the foundational requirement: local Ollama inference keeps sensitive family records off third-party servers, costs zero ongoing fees, and operates 100% air-gapped.
+
 ---
 
 ### [2026-10-04] — Final Verification & Milestone Summary
@@ -61,3 +72,5 @@ This running log captures technical architecture decisions, trade-offs, bug fixe
 - [x] Milestone (g): Impeccable Design Polish & Audit Pass
 - [x] Milestone (h): Accessibility (WCAG AAA) & Zero-Call Network Guard
 - [x] Milestone (i): Technical Documentation & Evaluation Benchmark
+- [x] Milestone (j): Visual Craft Elevation & "Build for a Friend" Story Modal
+
