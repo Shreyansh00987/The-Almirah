@@ -2,6 +2,9 @@
 
 > A 100% local, offline document keeper and 3D cabinet that extracts structured fields and deadlines from photographed paper documents using open-source models, filing them into a 3D walnut Almirah whose drawers glow by deadline proximity.
 
+[![Live Demo on Render](https://img.shields.io/badge/Live_Demo-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://the-almirah.onrender.com)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Shreyansh00987/The-Almirah)
+
 ---
 
 ## 🌟 Weekend Hackathon: Built for a Friend (Dad)
