@@ -1,0 +1,884 @@
+[
+  {
+    "id": "SYN-01",
+    "filename": "synthetic_01_star_health_insurance.png",
+    "image_url": "/synthetic/synthetic_01_star_health_insurance.png",
+    "file_path": "C:\\Users\\shrea\\Desktop\\The Almirah\\public\\synthetic\\synthetic_01_star_health_insurance.png",
+    "checksum": "sha256-syn-01-f389104",
+    "is_synthetic": true,
+    "is_confirmed": true,
+    "created_at": "2025-01-15T10:00:00Z",
+    "confirmed_at": "2025-01-15T10:05:00Z",
+    "confirmed_document_type": "Comprehensive Health Insurance Policy",
+    "confirmed_provider": "Star Health & Allied Insurance Co.",
+    "confirmed_identifier": "POL-SH-2024-8849102",
+    "confirmed_issue_date": "2025-11-26",
+    "confirmed_expiry_date": "2026-11-25",
+    "confirmed_amount": "\u20b9 18,450.00",
+    "confirmed_drawer": "Insurance",
+    "notes": "Annual family floater cover for 4 members.",
+    "extraction": {
+      "document_type": {
+        "value": "Comprehensive Health Insurance Policy",
+        "confidence": 0.98,
+        "bounding_box": {
+          "ymin": 25,
+          "xmin": 40,
+          "ymax": 60,
+          "xmax": 650,
+          "page": 1
+        }
+      },
+      "provider": {
+        "value": "Star Health & Allied Insurance Co.",
+        "confidence": 0.96,
+        "bounding_box": {
+          "ymin": 68,
+          "xmin": 40,
+          "ymax": 95,
+          "xmax": 500,
+          "page": 1
+        }
+      },
+      "identifier": {
+        "value": "POL-SH-2024-8849102",
+        "confidence": 0.97,
+        "bounding_box": {
+          "ymin": 210,
+          "xmin": 280,
+          "ymax": 245,
+          "xmax": 580,
+          "page": 1
+        }
+      },
+      "issue_date": {
+        "value": "2025-11-26",
+        "confidence": 0.94,
+        "bounding_box": {
+          "ymin": 290,
+          "xmin": 280,
+          "ymax": 325,
+          "xmax": 460,
+          "page": 1
+        }
+      },
+      "expiry_date": {
+        "value": "2026-11-25",
+        "confidence": 0.95,
+        "bounding_box": {
+          "ymin": 335,
+          "xmin": 280,
+          "ymax": 370,
+          "xmax": 460,
+          "page": 1
+        }
+      },
+      "amount": {
+        "value": "\u20b9 18,450.00",
+        "confidence": 0.91,
+        "bounding_box": {
+          "ymin": 420,
+          "xmin": 280,
+          "ymax": 455,
+          "xmax": 480,
+          "page": 1
+        }
+      },
+      "drawer": {
+        "value": "Insurance",
+        "confidence": 0.99,
+        "bounding_box": {
+          "ymin": 20,
+          "xmin": 700,
+          "ymax": 55,
+          "xmax": 880,
+          "page": 1
+        }
+      }
+    }
+  },
+  {
+    "id": "SYN-02",
+    "filename": "synthetic_02_national_auto_insurance.png",
+    "image_url": "/synthetic/synthetic_02_national_auto_insurance.png",
+    "file_path": "C:\\Users\\shrea\\Desktop\\The Almirah\\public\\synthetic\\synthetic_02_national_auto_insurance.png",
+    "checksum": "sha256-syn-02-f389104",
+    "is_synthetic": true,
+    "is_confirmed": true,
+    "created_at": "2025-01-15T10:00:00Z",
+    "confirmed_at": "2025-01-15T10:05:00Z",
+    "confirmed_document_type": "Private Car Package Policy Schedule",
+    "confirmed_provider": "National General Insurance Corp.",
+    "confirmed_identifier": "MOT-NG-773104-V",
+    "confirmed_issue_date": "2025-10-23",
+    "confirmed_expiry_date": "2026-10-22",
+    "confirmed_amount": "\u20b9 12,890.00",
+    "confirmed_drawer": "Vehicle",
+    "notes": "Vehicle No: DL-03-CC-4910 (Hyundai Creta SX).",
+    "extraction": {
+      "document_type": {
+        "value": "Private Car Package Policy Schedule",
+        "confidence": 0.97,
+        "bounding_box": {
+          "ymin": 25,
+          "xmin": 40,
+          "ymax": 60,
+          "xmax": 650,
+          "page": 1
+        }
+      },
+      "provider": {
+        "value": "National General Insurance Corp.",
+        "confidence": 0.95,
+        "bounding_box": {
+          "ymin": 68,
+          "xmin": 40,
+          "ymax": 95,
+          "xmax": 520,
+          "page": 1
+        }
+      },
+      "identifier": {
+        "value": "MOT-NG-773104-V",
+        "confidence": 0.96,
+        "bounding_box": {
+          "ymin": 210,
+          "xmin": 280,
+          "ymax": 245,
+          "xmax": 560,
+          "page": 1
+        }
+      },
+      "issue_date": {
+        "value": "2025-10-23",
+        "confidence": 0.93,
+        "bounding_box": {
+          "ymin": 290,
+          "xmin": 280,
+          "ymax": 325,
+          "xmax": 460,
+          "page": 1
+        }
+      },
+      "expiry_date": {
+        "value": "2026-10-22",
+        "confidence": 0.98,
+        "bounding_box": {
+          "ymin": 335,
+          "xmin": 280,
+          "ymax": 370,
+          "xmax": 460,
+          "page": 1
+        }
+      },
+      "amount": {
+        "value": "\u20b9 12,890.00",
+        "confidence": 0.92,
+        "bounding_box": {
+          "ymin": 420,
+          "xmin": 280,
+          "ymax": 455,
+          "xmax": 480,
+          "page": 1
+        }
+      },
+      "drawer": {
+        "value": "Vehicle",
+        "confidence": 0.99,
+        "bounding_box": {
+          "ymin": 20,
+          "xmin": 700,
+          "ymax": 55,
+          "xmax": 880,
+          "page": 1
+        }
+      }
+    }
+  },
+  {
+    "id": "SYN-03",
+    "filename": "synthetic_03_property_tax_receipt.png",
+    "image_url": "/synthetic/synthetic_03_property_tax_receipt.png",
+    "file_path": "C:\\Users\\shrea\\Desktop\\The Almirah\\public\\synthetic\\synthetic_03_property_tax_receipt.png",
+    "checksum": "sha256-syn-03-f389104",
+    "is_synthetic": true,
+    "is_confirmed": true,
+    "created_at": "2025-01-15T10:00:00Z",
+    "confirmed_at": "2025-01-15T10:05:00Z",
+    "confirmed_document_type": "Municipal Property Tax Assessment Receipt",
+    "confirmed_provider": "Municipal Corporation Directorate of Revenue",
+    "confirmed_identifier": "PTX-2025-WARD14-882",
+    "confirmed_issue_date": "2026-04-10",
+    "confirmed_expiry_date": "2027-03-31",
+    "confirmed_amount": "\u20b9 7,640.00",
+    "confirmed_drawer": "Property",
+    "notes": "Unit No. 402, Greenfield Apartments, Sector 14.",
+    "extraction": {
+      "document_type": {
+        "value": "Municipal Property Tax Assessment Receipt",
+        "confidence": 0.95,
+        "bounding_box": {
+          "ymin": 25,
+          "xmin": 40,
+          "ymax": 60,
+          "xmax": 670,
+          "page": 1
+        }
+      },
+      "provider": {
+        "value": "Municipal Corporation Directorate of Revenue",
+        "confidence": 0.94,
+        "bounding_box": {
+          "ymin": 68,
+          "xmin": 40,
+          "ymax": 95,
+          "xmax": 580,
+          "page": 1
+        }
+      },
+      "identifier": {
+        "value": "PTX-2025-WARD14-882",
+        "confidence": 0.96,
+        "bounding_box": {
+          "ymin": 210,
+          "xmin": 280,
+          "ymax": 245,
+          "xmax": 600,
+          "page": 1
+        }
+      },
+      "issue_date": {
+        "value": "2026-04-10",
+        "confidence": 0.92,
+        "bounding_box": {
+          "ymin": 290,
+          "xmin": 280,
+          "ymax": 325,
+          "xmax": 460,
+          "page": 1
+        }
+      },
+      "expiry_date": {
+        "value": "2027-03-31",
+        "confidence": 0.94,
+        "bounding_box": {
+          "ymin": 335,
+          "xmin": 280,
+          "ymax": 370,
+          "xmax": 460,
+          "page": 1
+        }
+      },
+      "amount": {
+        "value": "\u20b9 7,640.00",
+        "confidence": 0.9,
+        "bounding_box": {
+          "ymin": 420,
+          "xmin": 280,
+          "ymax": 455,
+          "xmax": 460,
+          "page": 1
+        }
+      },
+      "drawer": {
+        "value": "Property",
+        "confidence": 0.99,
+        "bounding_box": {
+          "ymin": 20,
+          "xmin": 700,
+          "ymax": 55,
+          "xmax": 880,
+          "page": 1
+        }
+      }
+    }
+  },
+  {
+    "id": "SYN-04",
+    "filename": "synthetic_04_vehicle_rc_smartcard.png",
+    "image_url": "/synthetic/synthetic_04_vehicle_rc_smartcard.png",
+    "file_path": "C:\\Users\\shrea\\Desktop\\The Almirah\\public\\synthetic\\synthetic_04_vehicle_rc_smartcard.png",
+    "checksum": "sha256-syn-04-f389104",
+    "is_synthetic": true,
+    "is_confirmed": true,
+    "created_at": "2025-01-15T10:00:00Z",
+    "confirmed_at": "2025-01-15T10:05:00Z",
+    "confirmed_document_type": "Motor Vehicle Registration Certificate",
+    "confirmed_provider": "Transport Department / Registering Authority",
+    "confirmed_identifier": "RC-MH-12-FG-5512",
+    "confirmed_issue_date": "2021-08-14",
+    "confirmed_expiry_date": "2036-08-13",
+    "confirmed_amount": "\u20b9 1,500.00",
+    "confirmed_drawer": "Vehicle",
+    "notes": "Class of Vehicle: LMV-Car / Fuel: Petrol-Hybrid.",
+    "extraction": {
+      "document_type": {
+        "value": "Motor Vehicle Registration Certificate",
+        "confidence": 0.94,
+        "bounding_box": {
+          "ymin": 25,
+          "xmin": 40,
+          "ymax": 60,
+          "xmax": 660,
+          "page": 1
+        }
+      },
+      "provider": {
+        "value": "Transport Department / Registering Authority",
+        "confidence": 0.91,
+        "bounding_box": {
+          "ymin": 68,
+          "xmin": 40,
+          "ymax": 95,
+          "xmax": 580,
+          "page": 1
+        }
+      },
+      "identifier": {
+        "value": "RC-MH-12-FG-5512",
+        "confidence": 0.88,
+        "bounding_box": {
+          "ymin": 210,
+          "xmin": 280,
+          "ymax": 245,
+          "xmax": 550,
+          "page": 1
+        }
+      },
+      "issue_date": {
+        "value": "2021-08-14",
+        "confidence": 0.89,
+        "bounding_box": {
+          "ymin": 290,
+          "xmin": 280,
+          "ymax": 325,
+          "xmax": 460,
+          "page": 1
+        }
+      },
+      "expiry_date": {
+        "value": "2036-08-13",
+        "confidence": 0.95,
+        "bounding_box": {
+          "ymin": 335,
+          "xmin": 280,
+          "ymax": 370,
+          "xmax": 460,
+          "page": 1
+        }
+      },
+      "amount": {
+        "value": "\u20b9 1,500.00",
+        "confidence": 0.79,
+        "bounding_box": {
+          "ymin": 420,
+          "xmin": 280,
+          "ymax": 455,
+          "xmax": 450,
+          "page": 1
+        }
+      },
+      "drawer": {
+        "value": "Vehicle",
+        "confidence": 0.98,
+        "bounding_box": {
+          "ymin": 20,
+          "xmin": 700,
+          "ymax": 55,
+          "xmax": 880,
+          "page": 1
+        }
+      }
+    }
+  },
+  {
+    "id": "SYN-05",
+    "filename": "synthetic_05_ecopure_water_purifier_warranty.png",
+    "image_url": "/synthetic/synthetic_05_ecopure_water_purifier_warranty.png",
+    "file_path": "C:\\Users\\shrea\\Desktop\\The Almirah\\public\\synthetic\\synthetic_05_ecopure_water_purifier_warranty.png",
+    "checksum": "sha256-syn-05-f389104",
+    "is_synthetic": true,
+    "is_confirmed": true,
+    "created_at": "2025-01-15T10:00:00Z",
+    "confirmed_at": "2025-01-15T10:05:00Z",
+    "confirmed_document_type": "2-Year Extended Service & Warranty Certificate",
+    "confirmed_provider": "EcoPure Water Technologies Ltd.",
+    "confirmed_identifier": "WAR-EP-99104-RO",
+    "confirmed_issue_date": "2024-12-11",
+    "confirmed_expiry_date": "2026-12-10",
+    "confirmed_amount": "\u20b9 3,200.00",
+    "confirmed_drawer": "Warranties",
+    "notes": "Covers RO membrane, booster pump, sediment filters.",
+    "extraction": {
+      "document_type": {
+        "value": "2-Year Extended Service & Warranty Certificate",
+        "confidence": 0.96,
+        "bounding_box": {
+          "ymin": 25,
+          "xmin": 40,
+          "ymax": 60,
+          "xmax": 680,
+          "page": 1
+        }
+      },
+      "provider": {
+        "value": "EcoPure Water Technologies Ltd.",
+        "confidence": 0.95,
+        "bounding_box": {
+          "ymin": 68,
+          "xmin": 40,
+          "ymax": 95,
+          "xmax": 530,
+          "page": 1
+        }
+      },
+      "identifier": {
+        "value": "WAR-EP-99104-RO",
+        "confidence": 0.97,
+        "bounding_box": {
+          "ymin": 210,
+          "xmin": 280,
+          "ymax": 245,
+          "xmax": 550,
+          "page": 1
+        }
+      },
+      "issue_date": {
+        "value": "2024-12-11",
+        "confidence": 0.92,
+        "bounding_box": {
+          "ymin": 290,
+          "xmin": 280,
+          "ymax": 325,
+          "xmax": 460,
+          "page": 1
+        }
+      },
+      "expiry_date": {
+        "value": "2026-12-10",
+        "confidence": 0.96,
+        "bounding_box": {
+          "ymin": 335,
+          "xmin": 280,
+          "ymax": 370,
+          "xmax": 460,
+          "page": 1
+        }
+      },
+      "amount": {
+        "value": "\u20b9 3,200.00",
+        "confidence": 0.88,
+        "bounding_box": {
+          "ymin": 420,
+          "xmin": 280,
+          "ymax": 455,
+          "xmax": 460,
+          "page": 1
+        }
+      },
+      "drawer": {
+        "value": "Warranties",
+        "confidence": 0.99,
+        "bounding_box": {
+          "ymin": 20,
+          "xmin": 700,
+          "ymax": 55,
+          "xmax": 880,
+          "page": 1
+        }
+      }
+    }
+  },
+  {
+    "id": "SYN-06",
+    "filename": "synthetic_06_apex_refrigerator_compressor.png",
+    "image_url": "/synthetic/synthetic_06_apex_refrigerator_compressor.png",
+    "file_path": "C:\\Users\\shrea\\Desktop\\The Almirah\\public\\synthetic\\synthetic_06_apex_refrigerator_compressor.png",
+    "checksum": "sha256-syn-06-f389104",
+    "is_synthetic": true,
+    "is_confirmed": true,
+    "created_at": "2025-01-15T10:00:00Z",
+    "confirmed_at": "2025-01-15T10:05:00Z",
+    "confirmed_document_type": "5-Year Inverter Compressor Warranty Guarantee",
+    "confirmed_provider": "Apex Home Appliances Consumer Care",
+    "confirmed_identifier": "APX-INV-COMP-4819",
+    "confirmed_issue_date": "2024-03-15",
+    "confirmed_expiry_date": "2029-03-14",
+    "confirmed_amount": "\u20b9 0.00 (Standard Guarantee)",
+    "confirmed_drawer": "Warranties",
+    "notes": "Model: FrostFree 450L Twin Cool. Authorized technician installation.",
+    "extraction": {
+      "document_type": {
+        "value": "5-Year Inverter Compressor Warranty Guarantee",
+        "confidence": 0.97,
+        "bounding_box": {
+          "ymin": 25,
+          "xmin": 40,
+          "ymax": 60,
+          "xmax": 690,
+          "page": 1
+        }
+      },
+      "provider": {
+        "value": "Apex Home Appliances Consumer Care",
+        "confidence": 0.95,
+        "bounding_box": {
+          "ymin": 68,
+          "xmin": 40,
+          "ymax": 95,
+          "xmax": 540,
+          "page": 1
+        }
+      },
+      "identifier": {
+        "value": "APX-INV-COMP-4819",
+        "confidence": 0.94,
+        "bounding_box": {
+          "ymin": 210,
+          "xmin": 280,
+          "ymax": 245,
+          "xmax": 560,
+          "page": 1
+        }
+      },
+      "issue_date": {
+        "value": "2024-03-15",
+        "confidence": 0.91,
+        "bounding_box": {
+          "ymin": 290,
+          "xmin": 280,
+          "ymax": 325,
+          "xmax": 460,
+          "page": 1
+        }
+      },
+      "expiry_date": {
+        "value": "2029-03-14",
+        "confidence": 0.97,
+        "bounding_box": {
+          "ymin": 335,
+          "xmin": 280,
+          "ymax": 370,
+          "xmax": 460,
+          "page": 1
+        }
+      },
+      "amount": {
+        "value": "\u20b9 0.00 (Standard Guarantee)",
+        "confidence": 0.84,
+        "bounding_box": {
+          "ymin": 420,
+          "xmin": 280,
+          "ymax": 455,
+          "xmax": 520,
+          "page": 1
+        }
+      },
+      "drawer": {
+        "value": "Warranties",
+        "confidence": 0.99,
+        "bounding_box": {
+          "ymin": 20,
+          "xmin": 700,
+          "ymax": 55,
+          "xmax": 880,
+          "page": 1
+        }
+      }
+    }
+  },
+  {
+    "id": "SYN-07",
+    "filename": "synthetic_07_national_identity_card.png",
+    "image_url": "/synthetic/synthetic_07_national_identity_card.png",
+    "file_path": "C:\\Users\\shrea\\Desktop\\The Almirah\\public\\synthetic\\synthetic_07_national_identity_card.png",
+    "checksum": "sha256-syn-07-f389104",
+    "is_synthetic": true,
+    "is_confirmed": true,
+    "created_at": "2025-01-15T10:00:00Z",
+    "confirmed_at": "2025-01-15T10:05:00Z",
+    "confirmed_document_type": "Citizen National Identity Document",
+    "confirmed_provider": "Unique Identification & Census Authority",
+    "confirmed_identifier": "ID-8841-9920-4182",
+    "confirmed_issue_date": "2019-06-22",
+    "confirmed_expiry_date": "2099-12-31",
+    "confirmed_amount": "N/A",
+    "confirmed_drawer": "Identity",
+    "notes": "Name: Rajesh V. Sharma, DOB: 1962-04-12. Blood Group: O+",
+    "extraction": {
+      "document_type": {
+        "value": "Citizen National Identity Document",
+        "confidence": 0.98,
+        "bounding_box": {
+          "ymin": 25,
+          "xmin": 40,
+          "ymax": 60,
+          "xmax": 650,
+          "page": 1
+        }
+      },
+      "provider": {
+        "value": "Unique Identification & Census Authority",
+        "confidence": 0.96,
+        "bounding_box": {
+          "ymin": 68,
+          "xmin": 40,
+          "ymax": 95,
+          "xmax": 560,
+          "page": 1
+        }
+      },
+      "identifier": {
+        "value": "ID-8841-9920-4182",
+        "confidence": 0.99,
+        "bounding_box": {
+          "ymin": 210,
+          "xmin": 280,
+          "ymax": 245,
+          "xmax": 580,
+          "page": 1
+        }
+      },
+      "issue_date": {
+        "value": "2019-06-22",
+        "confidence": 0.93,
+        "bounding_box": {
+          "ymin": 290,
+          "xmin": 280,
+          "ymax": 325,
+          "xmax": 460,
+          "page": 1
+        }
+      },
+      "expiry_date": {
+        "value": "2099-12-31",
+        "confidence": 0.91,
+        "bounding_box": {
+          "ymin": 335,
+          "xmin": 280,
+          "ymax": 370,
+          "xmax": 460,
+          "page": 1
+        }
+      },
+      "amount": {
+        "value": "N/A",
+        "confidence": 0.75,
+        "bounding_box": {
+          "ymin": 420,
+          "xmin": 280,
+          "ymax": 455,
+          "xmax": 420,
+          "page": 1
+        }
+      },
+      "drawer": {
+        "value": "Identity",
+        "confidence": 0.99,
+        "bounding_box": {
+          "ymin": 20,
+          "xmin": 700,
+          "ymax": 55,
+          "xmax": 880,
+          "page": 1
+        }
+      }
+    }
+  },
+  {
+    "id": "SYN-08",
+    "filename": "synthetic_08_driving_license_renewal.png",
+    "image_url": "/synthetic/synthetic_08_driving_license_renewal.png",
+    "file_path": "C:\\Users\\shrea\\Desktop\\The Almirah\\public\\synthetic\\synthetic_08_driving_license_renewal.png",
+    "checksum": "sha256-syn-08-f389104",
+    "is_synthetic": true,
+    "is_confirmed": true,
+    "created_at": "2025-01-15T10:00:00Z",
+    "confirmed_at": "2025-01-15T10:05:00Z",
+    "confirmed_document_type": "Motor Driving License Validity Slip",
+    "confirmed_provider": "State Transport Licensing Department",
+    "confirmed_identifier": "DL-04-2015-0099412",
+    "confirmed_issue_date": "2021-10-17",
+    "confirmed_expiry_date": "2026-10-16",
+    "confirmed_amount": "\u20b9 450.00",
+    "confirmed_drawer": "Identity",
+    "notes": "Authorized vehicles: MCWG, LMV-NT. Renewal mandatory before expiry.",
+    "extraction": {
+      "document_type": {
+        "value": "Motor Driving License Validity Slip",
+        "confidence": 0.95,
+        "bounding_box": {
+          "ymin": 25,
+          "xmin": 40,
+          "ymax": 60,
+          "xmax": 660,
+          "page": 1
+        }
+      },
+      "provider": {
+        "value": "State Transport Licensing Department",
+        "confidence": 0.94,
+        "bounding_box": {
+          "ymin": 68,
+          "xmin": 40,
+          "ymax": 95,
+          "xmax": 550,
+          "page": 1
+        }
+      },
+      "identifier": {
+        "value": "DL-04-2015-0099412",
+        "confidence": 0.96,
+        "bounding_box": {
+          "ymin": 210,
+          "xmin": 280,
+          "ymax": 245,
+          "xmax": 580,
+          "page": 1
+        }
+      },
+      "issue_date": {
+        "value": "2021-10-17",
+        "confidence": 0.9,
+        "bounding_box": {
+          "ymin": 290,
+          "xmin": 280,
+          "ymax": 325,
+          "xmax": 460,
+          "page": 1
+        }
+      },
+      "expiry_date": {
+        "value": "2026-10-16",
+        "confidence": 0.98,
+        "bounding_box": {
+          "ymin": 335,
+          "xmin": 280,
+          "ymax": 370,
+          "xmax": 460,
+          "page": 1
+        }
+      },
+      "amount": {
+        "value": "\u20b9 450.00",
+        "confidence": 0.91,
+        "bounding_box": {
+          "ymin": 420,
+          "xmin": 280,
+          "ymax": 455,
+          "xmax": 450,
+          "page": 1
+        }
+      },
+      "drawer": {
+        "value": "Identity",
+        "confidence": 0.99,
+        "bounding_box": {
+          "ymin": 20,
+          "xmin": 700,
+          "ymax": 55,
+          "xmax": 880,
+          "page": 1
+        }
+      }
+    }
+  },
+  {
+    "id": "SYN-09",
+    "filename": "synthetic_09_residential_lease_agreement.png",
+    "image_url": "/synthetic/synthetic_09_residential_lease_agreement.png",
+    "file_path": "C:\\Users\\shrea\\Desktop\\The Almirah\\public\\synthetic\\synthetic_09_residential_lease_agreement.png",
+    "checksum": "sha256-syn-09-f389104",
+    "is_synthetic": true,
+    "is_confirmed": true,
+    "created_at": "2025-01-15T10:00:00Z",
+    "confirmed_at": "2025-01-15T10:05:00Z",
+    "confirmed_document_type": "11-Month Tenancy & Lease Contract",
+    "confirmed_provider": "Estate Registrar & Notary Public",
+    "confirmed_identifier": "LSE-2024-SEC22-094",
+    "confirmed_issue_date": "2025-12-03",
+    "confirmed_expiry_date": "2026-11-02",
+    "confirmed_amount": "\u20b9 35,000.00 / month",
+    "confirmed_drawer": "Property",
+    "notes": "Security deposit \u20b9 70,000. 1-month notice period for renewal.",
+    "extraction": {
+      "document_type": {
+        "value": "11-Month Tenancy & Lease Contract",
+        "confidence": 0.96,
+        "bounding_box": {
+          "ymin": 25,
+          "xmin": 40,
+          "ymax": 60,
+          "xmax": 660,
+          "page": 1
+        }
+      },
+      "provider": {
+        "value": "Estate Registrar & Notary Public",
+        "confidence": 0.95,
+        "bounding_box": {
+          "ymin": 68,
+          "xmin": 40,
+          "ymax": 95,
+          "xmax": 540,
+          "page": 1
+        }
+      },
+      "identifier": {
+        "value": "LSE-2024-SEC22-094",
+        "confidence": 0.97,
+        "bounding_box": {
+          "ymin": 210,
+          "xmin": 280,
+          "ymax": 245,
+          "xmax": 580,
+          "page": 1
+        }
+      },
+      "issue_date": {
+        "value": "2025-12-03",
+        "confidence": 0.93,
+        "bounding_box": {
+          "ymin": 290,
+          "xmin": 280,
+          "ymax": 325,
+          "xmax": 460,
+          "page": 1
+        }
+      },
+      "expiry_date": {
+        "value": "2026-11-02",
+        "confidence": 0.97,
+        "bounding_box": {
+          "ymin": 335,
+          "xmin": 280,
+          "ymax": 370,
+          "xmax": 460,
+          "page": 1
+        }
+      },
+      "amount": {
+        "value": "\u20b9 35,000.00 / month",
+        "confidence": 0.92,
+        "bounding_box": {
+          "ymin": 420,
+          "xmin": 280,
+          "ymax": 455,
+          "xmax": 550,
+          "page": 1
+        }
+      },
+      "drawer": {
+        "value": "Property",
+        "confidence": 0.99,
+        "bounding_box": {
+          "ymin": 20,
+          "xmin": 700,
+          "ymax": 55,
+          "xmax": 880,
+          "page": 1
+        }
+      }
+    }
+  }
+]
