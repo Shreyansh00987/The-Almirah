@@ -180,13 +180,37 @@ In Terminal 2 (Start Next.js Frontend):
 ```bash
 npm run dev
 # Or for optimized production build:
-# npm run build && npm run start
+# npm run build && npm run start:local
 ```
 Open **`http://localhost:3001`** in your browser.
 
 ---
 
-## 7. Synthetic Document Benchmark (Evaluation)
+## 7. Cloud Deployment on Render (render.com)
+
+The Almirah is 100% pre-configured for instant deployment on [Render](https://render.com).
+
+### Option A: 1-Click Render Blueprint (Recommended)
+This repository includes a ready-to-deploy [`render.yaml`](render.yaml) specification:
+
+1. Log into your [Render Dashboard](https://dashboard.render.com).
+2. Click **New +** in the top navigation bar and select **Blueprint**.
+3. Connect your GitHub repository: `https://github.com/Shreyansh00987/The-Almirah`.
+4. Render automatically parses `render.yaml` and provisions:
+   - **`the-almirah-backend`**: Python 3.11 FastAPI service with auto-seeded synthetic SQLite documents.
+   - **`the-almirah-frontend`**: Next.js 14 Web Service connected to the backend with automated health monitoring.
+5. Click **Apply** to trigger deployment!
+
+### Option B: Single Free Web Service (Docker)
+To host the full stack on Render's 100% Free Tier within a single instance:
+1. In Render Dashboard, click **New +** -> **Web Service**.
+2. Connect `https://github.com/Shreyansh00987/The-Almirah`.
+3. Select **Docker** as the runtime.
+4. Render will build the bundled multi-stage [`Dockerfile`](Dockerfile) and run both the FastAPI engine and Next.js UI on a single live URL (`https://the-almirah.onrender.com`).
+
+---
+
+## 8. Synthetic Document Benchmark (Evaluation)
 
 The application ships with 9 realistic synthetic documents labeled `"Synthetic sample"` spanning all 5 drawers:
 
@@ -207,7 +231,7 @@ The application ships with 9 realistic synthetic documents labeled `"Synthetic s
 
 ---
 
-## 8. Limitations & Future Scope
+## 9. Limitations & Future Scope
 
 1. **Multi-page PDF Stitching**: Current MVP optimizes single-page scans and smartcard photos. Multi-page leases are processed via the primary schedule page.
 2. **Local GPU Requirement for 7B VLM**: While the fast OCR fallback operates in under 400ms on any CPU, running Qwen2.5-VL-7B at full precision requires ~6GB VRAM for real-time responsiveness.

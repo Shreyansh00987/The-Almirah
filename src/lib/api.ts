@@ -4,7 +4,10 @@ import {
 } from './types';
 import { SYNTHETIC_DOCUMENTS, getDemoDrawersSummary } from './demoData';
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const rawBackendUrl = process.env.NEXT_PUBLIC_API_URL;
+const BACKEND_URL = rawBackendUrl
+  ? (rawBackendUrl.startsWith('http') ? rawBackendUrl : `https://${rawBackendUrl}`)
+  : (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' ? '' : 'http://localhost:8000');
 
 class ApiService {
   private isDemoMode: boolean = false;

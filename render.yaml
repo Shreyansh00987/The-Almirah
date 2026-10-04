@@ -1,0 +1,44 @@
+# Render Blueprint Specification for The Almirah
+# Documentation: https://render.com/docs/blueprint-spec
+
+services:
+  # -------------------------------------------------------------
+  # Backend Service: FastAPI + SQLite + Grounded RAG Ingestion
+  # -------------------------------------------------------------
+  - type: web
+    name: the-almirah-backend
+    runtime: python
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: ALLOWED_ORIGINS
+        value: "*"
+      - key: DEMO_MODE
+        value: "true"
+      - key: ENABLE_OCR_FALLBACK
+        value: "true"
+
+  # -------------------------------------------------------------
+  # Frontend Service: Next.js 14 App Router + Three.js 3D Almirah
+  # -------------------------------------------------------------
+  - type: web
+    name: the-almirah-frontend
+    runtime: node
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: the-almirah-backend
+          property: host

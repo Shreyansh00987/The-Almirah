@@ -22,14 +22,12 @@ class Settings(BaseModel):
     ENABLE_OCR_FALLBACK: bool = os.getenv("ENABLE_OCR_FALLBACK", "true").lower() == "true"
     DEMO_MODE: bool = os.getenv("NEXT_PUBLIC_DEMO_MODE", "false").lower() == "true"
     
-    # Network restriction: Live mode strictly enforces 127.0.0.1 / localhost
+    # Network restriction: Live mode strictly enforces 127.0.0.1 / localhost, or allowed origins in production
     ALLOWED_ORIGINS: list[str] = [
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://localhost:3001",
-        "http://127.0.0.1:3001",
-        "http://localhost:8000",
-        "http://127.0.0.1:8000"
+        origin.strip() for origin in os.getenv(
+            "ALLOWED_ORIGINS",
+            "http://localhost:3000,http://127.0.0.1:3000,http://localhost:3001,http://127.0.0.1:3001,http://localhost:8000,http://127.0.0.1:8000"
+        ).split(",") if origin.strip()
     ]
 
 settings = Settings()

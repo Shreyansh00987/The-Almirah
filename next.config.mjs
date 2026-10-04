@@ -13,9 +13,9 @@ const nextConfig = {
               "default-src 'self' data: blob:",
               "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
               "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data: blob:",
+              "img-src 'self' data: blob: https:",
               "font-src 'self' data:",
-              "connect-src 'self' http://localhost:8000 http://127.0.0.1:8000 http://localhost:11434 http://127.0.0.1:11434",
+              "connect-src 'self' http://localhost:8000 http://127.0.0.1:8000 http://localhost:11434 http://127.0.0.1:11434 https://*.onrender.com https:",
               "media-src 'self' data: blob:",
               "object-src 'none'",
               "base-uri 'self'",
@@ -36,6 +36,24 @@ const nextConfig = {
             value: 'no-referrer',
           },
         ],
+      },
+    ];
+  },
+  async rewrites() {
+    const rawTarget = process.env.BACKEND_INTERNAL_URL || process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+    const target = rawTarget.startsWith('http') ? rawTarget : `https://${rawTarget}`;
+    return [
+      {
+        source: '/api/:path*',
+        destination: `${target}/api/:path*`,
+      },
+      {
+        source: '/documents/:path*',
+        destination: `${target}/documents/:path*`,
+      },
+      {
+        source: '/synthetic/:path*',
+        destination: `${target}/synthetic/:path*`,
       },
     ];
   },

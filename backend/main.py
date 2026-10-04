@@ -31,15 +31,23 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.ALLOWED_ORIGINS,
+    allow_origin_regex=r"https://.*\.onrender\.com",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Initialize Database on startup
+# Initialize Database on startup and auto-seed if empty
 @app.on_event("startup")
 def on_startup():
     init_db()
+    try:
+        docs = list_documents()
+        if len(docs) == 0:
+            from backend.seed import seed
+            seed()
+    except Exception as e:
+        print(f"Startup database check: {e}")
 
 # Mount static asset routes
 PUBLIC_DIR = Path(__file__).resolve().parent.parent / "public"

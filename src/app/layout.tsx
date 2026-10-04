@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta httpEquiv="Content-Security-Policy" content="default-src 'self' data: blob:; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' http://localhost:8000 http://127.0.0.1:8000 http://localhost:11434 http://127.0.0.1:11434;" />
+        <meta httpEquiv="Content-Security-Policy" content="default-src 'self' data: blob:; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' http://localhost:8000 http://127.0.0.1:8000 http://localhost:11434 http://127.0.0.1:11434 https://*.onrender.com https:;" />
       </head>
       <body className="bg-[#F7F5EF] text-stone-900 min-h-screen flex flex-col font-sans selection:bg-amber-200/60 selection:text-amber-950">
         {/* Dual Mode Switcher Banner */}
