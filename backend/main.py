@@ -103,8 +103,11 @@ async def upload_document(file: UploadFile = File(...)):
     # Preprocess (deskew, contrast enhancement, crop)
     processed_filename = f"norm_{Path(file.filename).stem}.png"
     processed_path = doc_folder / processed_filename
-    checksum, width, height = preprocess_document_image(raw_path, processed_path)
-    
+    try:
+        checksum, width, height = preprocess_document_image(raw_path, processed_path)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Invalid or corrupted document image: {str(e)}")
+        
     # Run structured extraction
     extraction = await extract_document_fields(processed_path)
     
