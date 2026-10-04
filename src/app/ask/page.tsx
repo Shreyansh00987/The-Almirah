@@ -5,10 +5,9 @@ import { api } from '@/lib/api';
 import { AskResponse, AskCitation, DocumentRecord } from '@/lib/types';
 import { DocumentModal } from '@/components/common/DocumentModal';
 import { 
-  Send, Sparkles, AlertCircle, HelpCircle, ExternalLink, 
-  Clock, ShieldAlert, FileText, CheckCircle2, Mic, Printer 
+  Send, Sparkles, ExternalLink, 
+  ShieldAlert, Mic, Printer 
 } from 'lucide-react';
-import Link from 'next/link';
 
 export default function AskPage() {
   const [question, setQuestion] = useState('');
@@ -70,7 +69,6 @@ export default function AskPage() {
   const openCitationInModal = async (citation: AskCitation) => {
     const doc = await api.getDocumentById(citation.document_id);
     if (doc) {
-      // Map field name back to field key
       let fieldKey = 'document_type';
       const fn = citation.field_name.toLowerCase();
       if (fn.includes('expiry') || fn.includes('date')) fieldKey = 'expiry_date';
@@ -90,12 +88,12 @@ export default function AskPage() {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E2DDD3] pb-5">
         <div>
-          <h1 className="font-serif text-3xl font-bold text-paper-light">
+          <h1 className="font-serif text-3xl font-bold text-stone-900">
             Ask Your Almirah
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-stone-500 mt-1">
             Grounded local semantic search across verified documents. Every response cites the exact document scan and region.
           </p>
         </div>
@@ -103,17 +101,17 @@ export default function AskPage() {
         <div className="flex items-center space-x-3">
           <button
             onClick={printEmergencyIndex}
-            className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 text-xs font-medium transition-colors"
+            className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-stone-50 text-stone-700 border border-[#E2DDD3] text-xs font-medium transition-colors shadow-xs cursor-pointer"
             title="Print Emergency Index"
           >
-            <Printer className="w-3.5 h-3.5 text-brass" />
+            <Printer className="w-3.5 h-3.5 text-[#B48226]" />
             <span>Emergency Index</span>
           </button>
         </div>
       </div>
 
       {/* Query Input Box */}
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 sm:p-5 shadow-xl space-y-4">
+      <div className="bg-white border border-[#E2DDD3] rounded-2xl p-4 sm:p-5 shadow-xs space-y-4">
         <form 
           onSubmit={(e) => {
             e.preventDefault();
@@ -127,14 +125,14 @@ export default function AskPage() {
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
               placeholder="e.g. When does my car insurance expire?"
-              className="w-full bg-slate-950 border border-slate-700 rounded-lg pl-4 pr-12 py-3 text-sm text-paper-light focus:border-brass focus:ring-1 focus:ring-brass font-medium shadow-inner"
+              className="w-full bg-[#FAF8F4] border border-[#E2DDD3] rounded-xl pl-4 pr-12 py-3 text-sm text-stone-900 focus:border-[#B48226] focus:ring-1 focus:ring-[#B48226] font-medium shadow-xs"
             />
             {/* Voice Input Button */}
             <button
               type="button"
               onClick={handleVoiceQuery}
-              className={`absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-full hover:bg-slate-800 transition-colors ${
-                isListening ? 'text-signal-red animate-pulse' : 'text-slate-400 hover:text-brass'
+              className={`absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-full hover:bg-stone-200 transition-colors cursor-pointer ${
+                isListening ? 'text-red-600 animate-pulse' : 'text-stone-400 hover:text-stone-700'
               }`}
               title="Voice Query (Whisper / Speech)"
               aria-label="Voice Query"
@@ -146,12 +144,12 @@ export default function AskPage() {
           <button
             type="submit"
             disabled={loading || !question.trim()}
-            className="px-5 py-3 rounded-lg bg-walnut-600 hover:bg-walnut-500 disabled:opacity-50 text-paper-light font-serif font-bold text-sm shadow-md border border-walnut-400 flex items-center space-x-2 transition-all cursor-pointer"
+            className="px-5 py-3 rounded-xl bg-[#5A3822] hover:bg-[#482C1B] disabled:opacity-50 text-[#FAF7F2] font-serif font-bold text-sm shadow-xs flex items-center space-x-2 transition-all cursor-pointer"
           >
             {loading ? (
-              <span className="w-4 h-4 border-2 border-paper-light border-t-transparent rounded-full animate-spin"></span>
+              <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
             ) : (
-              <Send className="w-4 h-4 text-brass-light" />
+              <Send className="w-4 h-4 text-amber-300" />
             )}
             <span className="hidden sm:inline">Ask</span>
           </button>
@@ -159,7 +157,7 @@ export default function AskPage() {
 
         {/* Suggested Queries */}
         <div className="space-y-1.5">
-          <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
+          <span className="text-[11px] font-semibold text-stone-500 uppercase tracking-wider block">
             Suggested Verification Prompts:
           </span>
           <div className="flex flex-wrap gap-2">
@@ -167,7 +165,7 @@ export default function AskPage() {
               <button
                 key={idx}
                 onClick={() => handleAsk(q)}
-                className="text-xs px-2.5 py-1 rounded bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-paper-light border border-slate-700/80 transition-colors text-left"
+                className="text-xs px-2.5 py-1 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-700 border border-stone-200 transition-colors text-left cursor-pointer"
               >
                 {q}
               </button>
@@ -178,40 +176,40 @@ export default function AskPage() {
 
       {/* Answer and Citations Card */}
       {response && (
-        <div className="bg-slate-900 border border-slate-700 rounded-xl p-6 shadow-2xl space-y-5 animate-fadeIn">
+        <div className="bg-white border border-[#E2DDD3] rounded-2xl p-6 shadow-sm space-y-5 animate-fadeIn">
           {/* Answer Header & Guardrail Flag */}
-          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-stone-200 pb-3">
             <div className="flex items-center space-x-2">
-              <Sparkles className="w-4 h-4 text-brass" />
-              <span className="font-serif font-bold text-paper-light text-base">
+              <Sparkles className="w-4 h-4 text-[#B48226]" />
+              <span className="font-serif font-bold text-stone-900 text-base">
                 Local RAG Answer
               </span>
             </div>
 
-            <div className="flex items-center space-x-3 text-[11px] text-slate-400 font-mono">
-              <span>Latency: <strong className="text-slate-300">{response.inference_time_ms} ms</strong></span>
+            <div className="flex items-center space-x-3 text-[11px] text-stone-500 font-mono">
+              <span>Latency: <strong className="text-stone-800">{response.inference_time_ms} ms</strong></span>
               <span>·</span>
-              <span>Engine: <strong className="text-emerald-400">{response.model_used}</strong></span>
+              <span>Engine: <strong className="text-emerald-700">{response.model_used}</strong></span>
             </div>
           </div>
 
           {/* Answer Prose */}
           <div className={`text-base leading-relaxed ${
             response.found_in_corpus 
-              ? 'text-paper-light font-sans' 
-              : 'text-amber-200 bg-amber-950/30 p-3.5 rounded border border-amber-800/60 font-medium'
+              ? 'text-stone-900 font-sans' 
+              : 'text-amber-900 bg-amber-50 p-3.5 rounded-xl border border-amber-200 font-medium'
           }`}>
             {response.answer}
           </div>
 
           {/* Citations Linking to Regions */}
           {response.citations.length > 0 && (
-            <div className="space-y-3 pt-3 border-t border-slate-800">
+            <div className="space-y-3 pt-3 border-t border-stone-200">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                  Verified Document Citations (Click to view region):
+                <span className="text-xs font-semibold text-stone-500 uppercase tracking-wider">
+                  Verified Document Citations (Click to inspect region):
                 </span>
-                <span className="text-[11px] text-slate-500">
+                <span className="text-[11px] text-stone-500">
                   {response.citations.length} Grounded Source{response.citations.length === 1 ? '' : 's'}
                 </span>
               </div>
@@ -221,26 +219,26 @@ export default function AskPage() {
                   <div
                     key={idx}
                     onClick={() => openCitationInModal(c)}
-                    className="p-3 rounded-lg bg-slate-950 border border-slate-800 hover:border-brass transition-all cursor-pointer group shadow flex flex-col justify-between"
+                    className="p-3.5 rounded-xl bg-[#FAF8F4] border border-[#E2DDD3] hover:border-[#B48226] transition-all cursor-pointer group shadow-xs flex flex-col justify-between"
                   >
                     <div>
                       <div className="flex items-center justify-between text-xs mb-1">
-                        <span className="font-serif font-bold text-paper-light group-hover:text-brass-light transition-colors">
+                        <span className="font-serif font-bold text-stone-900 group-hover:text-[#5A3822] transition-colors">
                           {c.document_title}
                         </span>
-                        <span className="text-[10px] px-1.5 py-0.2 rounded bg-slate-800 text-brass border border-slate-700">
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-stone-100 text-stone-800 border border-stone-200 font-medium">
                           {c.drawer}
                         </span>
                       </div>
-                      <div className="text-xs text-slate-400">
+                      <div className="text-xs text-stone-600">
                         <span>{c.field_name}: </span>
-                        <strong className="text-slate-200 font-mono">{c.cited_text}</strong>
+                        <strong className="text-stone-900 font-mono">{c.cited_text}</strong>
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between text-[11px] text-slate-500 pt-2 mt-2 border-t border-slate-900">
+                    <div className="flex items-center justify-between text-[11px] text-stone-500 pt-2 mt-2 border-t border-stone-200">
                       <span>Source: Page {c.page} Region</span>
-                      <span className="text-brass group-hover:underline flex items-center font-medium">
+                      <span className="text-[#B48226] group-hover:underline flex items-center font-medium">
                         <span>Inspect Region</span>
                         <ExternalLink className="w-3 h-3 ml-1" />
                       </span>
@@ -253,8 +251,8 @@ export default function AskPage() {
 
           {/* Strict Zero-Guess Guardrail Footnote */}
           {!response.found_in_corpus && (
-            <div className="flex items-start space-x-2 text-xs text-slate-400 pt-1">
-              <ShieldAlert className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+            <div className="flex items-start space-x-2 text-xs text-stone-500 pt-1">
+              <ShieldAlert className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
               <span>
                 Zero-guess guardrail active: The model refuses to extrapolate or hallucinate when verified facts are not found in your filed documents.
               </span>

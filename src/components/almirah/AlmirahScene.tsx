@@ -18,24 +18,24 @@ function CameraRig({ openedDrawerIndex, drawerYPositions }: CameraRigProps) {
   const targetLookAt = useRef(new THREE.Vector3(0, 0, 0));
 
   useFrame((state, delta) => {
-    // Subtle, elder-friendly mouse parallax (gentle movement)
-    const parallaxX = mouse.x * 0.4;
-    const parallaxY = mouse.y * 0.28;
+    // Subtle, gentle elder-friendly parallax
+    const parallaxX = mouse.x * 0.35;
+    const parallaxY = mouse.y * 0.22;
 
     let targetY = 0.05;
-    let targetZ = 6.4;
+    let targetZ = 6.0;
 
     if (openedDrawerIndex !== null) {
-      targetY = (drawerYPositions[openedDrawerIndex] ?? 0) * 0.75 + 0.1;
-      targetZ = 5.1; // Smooth focal pull toward open drawer
+      targetY = (drawerYPositions[openedDrawerIndex] ?? 0) * 0.72 + 0.1;
+      targetZ = 5.0; // Smooth focal pull toward open drawer
     }
 
-    camera.position.x = THREE.MathUtils.lerp(camera.position.x, parallaxX, delta * 3.2);
-    camera.position.y = THREE.MathUtils.lerp(camera.position.y, targetY + parallaxY, delta * 3.2);
-    camera.position.z = THREE.MathUtils.lerp(camera.position.z, targetZ, delta * 3.2);
+    camera.position.x = THREE.MathUtils.lerp(camera.position.x, parallaxX, delta * 3.5);
+    camera.position.y = THREE.MathUtils.lerp(camera.position.y, targetY + parallaxY, delta * 3.5);
+    camera.position.z = THREE.MathUtils.lerp(camera.position.z, targetZ, delta * 3.5);
 
     const targetYLook = openedDrawerIndex !== null ? (drawerYPositions[openedDrawerIndex] ?? 0) * 0.5 : 0;
-    targetLookAt.current.y = THREE.MathUtils.lerp(targetLookAt.current.y, targetYLook, delta * 4.2);
+    targetLookAt.current.y = THREE.MathUtils.lerp(targetLookAt.current.y, targetYLook, delta * 4.5);
     camera.lookAt(targetLookAt.current);
   });
 
@@ -45,72 +45,86 @@ function CameraRig({ openedDrawerIndex, drawerYPositions }: CameraRigProps) {
 interface AlmirahSceneProps {
   drawers: DrawerSummary[];
   onSelectDocument: (doc: DocumentRecord) => void;
-  activeDrawerName?: string | null;
+  activeDrawerIndex?: number | null;
+  onDrawerChange?: (index: number | null) => void;
 }
 
 export const AlmirahScene: React.FC<AlmirahSceneProps> = ({
   drawers,
   onSelectDocument,
-  activeDrawerName,
+  activeDrawerIndex = null,
+  onDrawerChange,
 }) => {
   // Y positions for the 5 drawers with precise architectural spacing
   const drawerYPositions = [1.5, 0.75, 0.0, -0.75, -1.5];
-  const [openedIndex, setOpenedIndex] = useState<number | null>(null);
+  const [internalOpenedIndex, setInternalOpenedIndex] = useState<number | null>(null);
 
-  // Sync external active drawer if passed
-  useEffect(() => {
-    if (activeDrawerName) {
-      const idx = drawers.findIndex(d => d.drawer === activeDrawerName);
-      if (idx !== -1) setOpenedIndex(idx);
-    }
-  }, [activeDrawerName, drawers]);
+  // Sync with controlled index if provided
+  const openedIndex = activeDrawerIndex !== undefined && activeDrawerIndex !== null 
+    ? activeDrawerIndex 
+    : internalOpenedIndex;
+
+  const handleToggle = (idx: number) => {
+    const nextIdx = openedIndex === idx ? null : idx;
+    setInternalOpenedIndex(nextIdx);
+    onDrawerChange?.(nextIdx);
+  };
 
   // Full keyboard accessibility: Esc to close, Arrow keys to navigate
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        setOpenedIndex(null);
+        setInternalOpenedIndex(null);
+        onDrawerChange?.(null);
       } else if (e.key === 'ArrowDown') {
-        setOpenedIndex(prev => (prev === null ? 0 : Math.min(prev + 1, drawers.length - 1)));
+        const next = openedIndex === null ? 0 : Math.min(openedIndex + 1, drawers.length - 1);
+        setInternalOpenedIndex(next);
+        onDrawerChange?.(next);
       } else if (e.key === 'ArrowUp') {
-        setOpenedIndex(prev => (prev === null ? 0 : Math.max(prev - 1, 0)));
+        const next = openedIndex === null ? 0 : Math.max(openedIndex - 1, 0);
+        setInternalOpenedIndex(next);
+        onDrawerChange?.(next);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [drawers.length]);
+  }, [drawers.length, openedIndex, onDrawerChange]);
 
   return (
     <div className="w-full h-full relative select-none">
       <Canvas
-        camera={{ position: [0, 0, 6.4], fov: 40 }}
+        camera={{ position: [0, 0, 6.0], fov: 38 }}
         className="w-full h-full"
-        onPointerMissed={() => setOpenedIndex(null)}
+        onPointerMissed={() => {
+          setInternalOpenedIndex(null);
+          onDrawerChange?.(null);
+        }}
       >
-        <color attach="background" args={['#101317']} />
+        {/* Warm Studio Sunlit Background */}
+        <color attach="background" args={['#F5F2EB']} />
         
-        {/* Warm Golden Key Light (Simulating soft afternoon study light) */}
+        {/* Soft Sunlit Studio Key Light */}
         <directionalLight
-          position={[4.5, 6.0, 5.5]}
-          intensity={1.9}
-          color="#FFF4E6"
+          position={[5.0, 7.0, 6.0]}
+          intensity={2.4}
+          color="#FFFDF5"
         />
 
-        {/* Soft Slate Ambient Fill (Prevents harsh shadows) */}
-        <ambientLight intensity={0.7} color="#45546C" />
+        {/* Generous Warm Ambient Fill */}
+        <ambientLight intensity={1.25} color="#FAF7F0" />
 
-        {/* Subtle Slate Rim Light from the Left (Separates dark wood from background) */}
+        {/* Soft Cool Sky Accent from Left */}
         <directionalLight
-          position={[-5.0, 3.0, 2.0]}
-          intensity={0.65}
-          color="#6E88AC"
+          position={[-5.5, 3.5, 2.5]}
+          intensity={0.5}
+          color="#E0F2FE"
         />
 
-        {/* Warm Low Floor Bounce */}
-        <pointLight position={[0, -2.8, 1.5]} intensity={0.6} color="#6B4A33" />
+        {/* Warm Floor Bounce Light */}
+        <pointLight position={[0, -2.6, 2.0]} intensity={0.6} color="#E8D5C4" />
 
-        {/* Warm Golden Front Accent */}
-        <pointLight position={[0, 1.8, 3.2]} intensity={0.9} color="#E0A13A" />
+        {/* Warm Front Accent Light */}
+        <pointLight position={[0, 1.5, 3.0]} intensity={0.7} color="#FCE7B8" />
 
         {/* Camera Parallax and Focus Rig */}
         <CameraRig
@@ -129,19 +143,19 @@ export const AlmirahScene: React.FC<AlmirahSceneProps> = ({
             yPos={drawerYPositions[idx] ?? 0}
             summary={summary}
             isOpen={openedIndex === idx}
-            onToggle={() => setOpenedIndex(openedIndex === idx ? null : idx)}
+            onToggle={() => handleToggle(idx)}
             onSelectDocument={onSelectDocument}
           />
         ))}
 
-        {/* Ultra-Soft Realistic Ground Contact Shadows */}
+        {/* Soft Natural Ground Contact Shadows on Studio Floor */}
         <ContactShadows
           position={[0, -2.42, 0]}
-          opacity={0.82}
-          scale={10.5}
+          opacity={0.42}
+          scale={11.0}
           blur={2.4}
           far={4.5}
-          color="#06080A"
+          color="#422B1D"
         />
       </Canvas>
     </div>

@@ -1,19 +1,18 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import confetti from 'canvas-confetti';
 import { api } from '@/lib/api';
 import { DocumentRecord, DocumentVerificationPayload } from '@/lib/types';
 import { DocumentViewer } from '@/components/verify/DocumentViewer';
 import { FieldEditor } from '@/components/verify/FieldEditor';
-import { ArrowLeft, CheckCircle2, FolderArchive, ArrowRight } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 function VerifyContent() {
   const searchParams = useSearchParams();
-  const router = useRouter();
   const docId = searchParams.get('id') || 'SYN-01';
 
   const [document, setDocument] = useState<DocumentRecord | null>(null);
@@ -46,7 +45,7 @@ function VerifyContent() {
         particleCount: 50,
         spread: 60,
         origin: { y: 0.7 },
-        colors: ['#C8A265', '#E0A13A', '#6B4A33']
+        colors: ['#B48226', '#D97706', '#5A3822']
       });
     } catch (err) {
       console.error("Failed to confirm", err);
@@ -56,8 +55,8 @@ function VerifyContent() {
   if (loading) {
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center space-y-4">
-        <div className="w-12 h-12 border-4 border-slate-700 border-t-brass rounded-full animate-spin"></div>
-        <p className="font-serif text-lg text-slate-300">Loading document twin...</p>
+        <div className="w-12 h-12 border-4 border-stone-200 border-t-[#5A3822] rounded-full animate-spin"></div>
+        <p className="font-serif text-lg text-stone-700">Loading document twin...</p>
       </div>
     );
   }
@@ -65,11 +64,11 @@ function VerifyContent() {
   if (!document) {
     return (
       <div className="max-w-xl mx-auto py-16 text-center space-y-4">
-        <h2 className="font-serif text-2xl text-paper-light">Document Not Found</h2>
-        <p className="text-slate-400 text-sm">The requested document could not be located in local storage.</p>
+        <h2 className="font-serif text-2xl text-stone-900">Document Not Found</h2>
+        <p className="text-stone-500 text-sm">The requested document could not be located in local storage.</p>
         <Link 
           href="/"
-          className="inline-flex items-center space-x-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-paper-light rounded border border-slate-600"
+          className="inline-flex items-center space-x-2 px-4 py-2 bg-[#5A3822] text-[#FAF7F2] rounded-lg"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Return to Almirah</span>
@@ -79,28 +78,28 @@ function VerifyContent() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div className="max-w-[1700px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
       {/* Breadcrumb / Top Bar */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-5">
         <div className="flex items-center space-x-3">
           <Link
             href="/"
-            className="flex items-center space-x-1.5 text-xs text-slate-400 hover:text-paper-light transition-colors p-1 rounded"
+            className="flex items-center space-x-1.5 text-xs font-semibold text-stone-600 hover:text-stone-900 transition-colors p-1 rounded"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Almirah</span>
           </Link>
-          <span className="text-slate-600">/</span>
-          <span className="text-xs font-mono text-slate-300">{document.id}</span>
+          <span className="text-stone-300">/</span>
+          <span className="text-xs font-mono text-stone-700 font-bold">{document.id}</span>
         </div>
 
         {confirmedSuccess && (
-          <div className="flex items-center space-x-3 bg-emerald-950/80 border border-emerald-700 px-4 py-1.5 rounded-lg text-emerald-300 text-xs animate-fadeIn">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-            <span className="font-medium">Successfully filed into {document.confirmed_drawer || 'Cabinet'} drawer!</span>
+          <div className="flex items-center space-x-3 bg-emerald-50 border border-emerald-200 px-4 py-1.5 rounded-xl text-emerald-800 text-xs shadow-xs animate-fadeIn">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+            <span className="font-semibold">Successfully filed into {document.confirmed_drawer || 'Cabinet'} drawer!</span>
             <Link
               href={`/?drawer=${document.confirmed_drawer}`}
-              className="underline font-semibold hover:text-white flex items-center ml-2"
+              className="underline font-bold hover:text-emerald-950 flex items-center ml-2"
             >
               <span>Open Drawer</span>
               <ArrowRight className="w-3 h-3 ml-1" />
@@ -138,7 +137,7 @@ export default function VerifyPage() {
   return (
     <Suspense fallback={
       <div className="min-h-[70vh] flex items-center justify-center">
-        <div className="w-12 h-12 border-4 border-slate-700 border-t-brass rounded-full animate-spin"></div>
+        <div className="w-12 h-12 border-4 border-stone-200 border-t-[#5A3822] rounded-full animate-spin"></div>
       </div>
     }>
       <VerifyContent />

@@ -60,6 +60,24 @@ This running log captures technical architecture decisions, trade-offs, bug fixe
   - Added dedicated story modal articulating the "Build for a Friend" narrative: Dad (Rajesh Sharma) kept family documents in a physical Godrej almirah for 35 years and refused cloud storage.
   - Framed why open-source AI is the foundational requirement: local Ollama inference keeps sensitive family records off third-party servers, costs zero ongoing fees, and operates 100% air-gapped.
 
+#### Problem 6: Full-Screen Studio Viewport & Luminous Warm Light Aesthetic
+- **Full Viewport Utilization**:
+  - Resolved user feedback where only half the vertical screen was covered and dark empty voids dominated.
+  - Re-architected home layout into a majestic 2-column widescreen studio stage (`min-h-[calc(100vh-170px)]`).
+  - Left 65%: Expansive sunlit architectural study where the 3D Almirah cabinet stands tall and prominent.
+  - Right 35%: Tactile Drawer & Document Inspector that stays synchronized with 3D drawer states.
+- **Obstructive 3D Overlay Elimination**:
+  - Removed un-transformed `<Html distanceFactor={...}>` tooltips from 3D space that caused gigantic overlapping labels (`Citizen National Identity D...`, `12d left`) blocking the cabinet doors.
+  - Replaced with physical 3D cabochon jewel indicators and synchronized the rich document list into the right-hand Inspector panel.
+- **Light Color Palette Overhaul**:
+  - Replaced pitch-black slate with luminous warm archival palette:
+    - Parchment & warm linen backgrounds (`#F7F5EF`, `#F5F2EB`, `#FAF8F4`).
+    - Crisp espresso / warm charcoal typography (`#1C1917`, `#44403C`).
+    - Rich warm oiled walnut (`#55341E`, `#6B452B`) and gleaming brass (`#B48226`, `#D4AF37`).
+    - Luminous, high-contrast urgency signals: Signal Red (`#DC2626`), Warm Amber (`#D97706`), Calm Emerald (`#059669`).
+  - Enhanced 3D scene lighting: Warm directional sunlight (`#FFFDF5`, intensity 2.4) casting natural ground contact shadows (`#422B1D`, opacity 0.42).
+  - Maintained 0 anti-patterns in Impeccable mechanical detector.
+
 ---
 
 ### [2026-10-04] — Final Verification & Milestone Summary
@@ -73,4 +91,6 @@ This running log captures technical architecture decisions, trade-offs, bug fixe
 - [x] Milestone (h): Accessibility (WCAG AAA) & Zero-Call Network Guard
 - [x] Milestone (i): Technical Documentation & Evaluation Benchmark
 - [x] Milestone (j): Visual Craft Elevation & "Build for a Friend" Story Modal
+- [x] Milestone (k): Full-Screen Widescreen Studio Stage & Luminous Warm Light Theme
+
 

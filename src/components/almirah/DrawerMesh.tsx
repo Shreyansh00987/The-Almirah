@@ -2,10 +2,9 @@
 
 import React, { useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { RoundedBox, Html } from '@react-three/drei';
+import { RoundedBox } from '@react-three/drei';
 import * as THREE from 'three';
 import { DrawerSummary, DeadlineUrgency, DocumentRecord } from '@/lib/types';
-import { AlertCircle, Clock, ShieldCheck, FileText } from 'lucide-react';
 
 interface DrawerMeshProps {
   index: number;
@@ -26,24 +25,22 @@ export const DrawerMesh: React.FC<DrawerMeshProps> = ({
 }) => {
   const groupRef = useRef<THREE.Group>(null);
   const glowMeshRef = useRef<THREE.Mesh>(null);
+  const gemMeshRef = useRef<THREE.Mesh>(null);
   const [hovered, setHovered] = useState(false);
   const [hoveredDocId, setHoveredDocId] = useState<string | null>(null);
 
   // Target Z position: 0 when closed, 1.45 when pulled open
   const targetZ = isOpen ? 1.45 : 0.0;
 
-  // Visual roman numerals for authentic classic almirah feel
-  const romanNumerals = ['I', 'II', 'III', 'IV', 'V'];
-
   // Determine glow color from deadline urgency
   const getGlowColor = (urgency: DeadlineUrgency) => {
     switch (urgency) {
       case 'red':
-        return '#C8453B'; // Signal Red (Urgent / < 30 days or overdue)
+        return '#DC2626'; // Signal Red (Urgent / < 30 days or overdue)
       case 'amber':
-        return '#E0A13A'; // Amber (30 - 90 days)
+        return '#D97706'; // Warm Amber (30 - 90 days)
       default:
-        return '#5A677D'; // Calm slate/warm (> 90 days)
+        return '#059669'; // Safe Emerald (> 90 days or permanent)
     }
   };
 
@@ -57,7 +54,7 @@ export const DrawerMesh: React.FC<DrawerMeshProps> = ({
       groupRef.current.position.z = THREE.MathUtils.lerp(
         groupRef.current.position.z,
         targetZ,
-        delta * 6.0
+        delta * 6.5
       );
     }
 
@@ -67,13 +64,24 @@ export const DrawerMesh: React.FC<DrawerMeshProps> = ({
       if (mat) {
         if (isUrgent) {
           const t = state.clock.getElapsedTime();
-          mat.emissiveIntensity = 1.6 + Math.sin(t * 3.8) * 0.9;
+          mat.emissiveIntensity = 1.4 + Math.sin(t * 3.5) * 0.7;
         } else if (isAmber) {
           const t = state.clock.getElapsedTime();
-          mat.emissiveIntensity = 0.9 + Math.sin(t * 2.2) * 0.45;
+          mat.emissiveIntensity = 0.8 + Math.sin(t * 2.0) * 0.35;
         } else {
-          mat.emissiveIntensity = 0.25;
+          mat.emissiveIntensity = 0.2;
         }
+      }
+    }
+
+    // Jewel cabochon pulse
+    if (gemMeshRef.current) {
+      const gemMat = gemMeshRef.current.material as THREE.MeshStandardMaterial;
+      if (gemMat && (isUrgent || isAmber)) {
+        const t = state.clock.getElapsedTime();
+        gemMat.emissiveIntensity = isUrgent 
+          ? 1.5 + Math.sin(t * 4.0) * 0.8 
+          : 0.9 + Math.sin(t * 2.5) * 0.4;
       }
     }
   });
@@ -82,9 +90,12 @@ export const DrawerMesh: React.FC<DrawerMeshProps> = ({
   const drawerHeight = 0.68;
   const drawerDepth = 2.1;
 
+  // Roman numerals
+  const romanNumerals = ['I', 'II', 'III', 'IV', 'V'];
+
   return (
     <group ref={groupRef} position={[0, yPos, 0]}>
-      {/* Front Face of Drawer: Chamfered Walnut Wood with Handcrafted Bevels */}
+      {/* Front Face of Drawer: Chamfered Oiled Walnut Wood */}
       <group
         onClick={(e) => {
           e.stopPropagation();
@@ -104,16 +115,16 @@ export const DrawerMesh: React.FC<DrawerMeshProps> = ({
           position={[0, 0, 0.04]}
         >
           <meshStandardMaterial
-            color={hovered ? '#7A5236' : '#6B4A33'}
-            roughness={0.65}
-            metalness={0.08}
+            color={hovered ? '#6B452B' : '#55341E'}
+            roughness={0.62}
+            metalness={0.06}
           />
         </RoundedBox>
 
         {/* Decorative Inner Wood Inset Border (Traditional Indian Carpentry Groove) */}
         <mesh position={[0, 0, 0.092]}>
           <boxGeometry args={[drawerWidth - 0.25, drawerHeight - 0.18, 0.01]} />
-          <meshStandardMaterial color="#553A26" roughness={0.8} />
+          <meshStandardMaterial color="#422715" roughness={0.78} />
         </mesh>
       </group>
 
@@ -123,7 +134,7 @@ export const DrawerMesh: React.FC<DrawerMeshProps> = ({
         <meshStandardMaterial
           color={glowColorHex}
           emissive={glowColorHex}
-          emissiveIntensity={isUrgent ? 1.6 : isAmber ? 0.9 : 0.25}
+          emissiveIntensity={isUrgent ? 1.4 : isAmber ? 0.8 : 0.2}
           roughness={0.3}
           metalness={0.2}
         />
@@ -131,34 +142,41 @@ export const DrawerMesh: React.FC<DrawerMeshProps> = ({
 
       {/* Heavy Ornate Brass Label Plate */}
       <group position={[0, 0.06, 0.1]}>
-        <RoundedBox args={[1.55, 0.28, 0.025]} radius={0.015} smoothness={2}>
+        <RoundedBox args={[1.65, 0.26, 0.025]} radius={0.015} smoothness={2}>
           <meshStandardMaterial
-            color="#C8A265"
-            metalness={0.85}
-            roughness={0.25}
+            color="#D4AF37"
+            metalness={0.88}
+            roughness={0.22}
           />
         </RoundedBox>
 
-        {/* Decorative Brass Mounting Rivets / Screws */}
-        {[-0.7, 0.7].map((x, i) => (
+        {/* Decorative Brass Mounting Screws */}
+        {[-0.72, 0.72].map((x, i) => (
           <mesh key={i} position={[x, 0, 0.015]}>
             <cylinderGeometry args={[0.018, 0.018, 0.015, 8]} />
             <meshStandardMaterial color="#916F35" metalness={0.9} roughness={0.3} />
           </mesh>
         ))}
+      </group>
 
-        {/* Crisp HTML Label inside Brass Plate */}
-        <Html
-          position={[0, 0, 0.02]}
-          center
-          transform
-          scale={0.11}
-          style={{ pointerEvents: 'none' }}
-        >
-          <div className="font-serif font-black tracking-widest text-[#2A1D0C] uppercase text-xs select-none text-center whitespace-nowrap drop-shadow-sm">
-            {romanNumerals[index]}. {summary.drawer}
-          </div>
-        </Html>
+      {/* Physical 3D Urgency Status Jewel (Embedded cabochon gem beside the label) */}
+      <group position={[-1.35, 0.06, 0.1]}>
+        {/* Brass bezel ring */}
+        <mesh rotation={[Math.PI / 2, 0, 0]}>
+          <cylinderGeometry args={[0.065, 0.065, 0.02, 16]} />
+          <meshStandardMaterial color="#C8A265" metalness={0.9} roughness={0.25} />
+        </mesh>
+        {/* Glowing glass jewel */}
+        <mesh ref={gemMeshRef} position={[0, 0, 0.015]}>
+          <sphereGeometry args={[0.045, 16, 16]} />
+          <meshStandardMaterial
+            color={glowColorHex}
+            emissive={glowColorHex}
+            emissiveIntensity={isUrgent ? 1.6 : isAmber ? 0.9 : 0.3}
+            roughness={0.1}
+            metalness={0.1}
+          />
+        </mesh>
       </group>
 
       {/* Authentic Traditional Heavy Brass Pull Handle */}
@@ -166,17 +184,17 @@ export const DrawerMesh: React.FC<DrawerMeshProps> = ({
         {/* Left Mount Bracket */}
         <mesh position={[-0.4, 0, 0]}>
           <boxGeometry args={[0.08, 0.08, 0.06]} />
-          <meshStandardMaterial color="#C8A265" metalness={0.85} roughness={0.25} />
+          <meshStandardMaterial color="#C8A265" metalness={0.88} roughness={0.22} />
         </mesh>
         {/* Right Mount Bracket */}
         <mesh position={[0.4, 0, 0]}>
           <boxGeometry args={[0.08, 0.08, 0.06]} />
-          <meshStandardMaterial color="#C8A265" metalness={0.85} roughness={0.25} />
+          <meshStandardMaterial color="#C8A265" metalness={0.88} roughness={0.22} />
         </mesh>
         {/* Horizontal Brass Bar */}
         <mesh position={[0, 0, 0.03]} rotation={[0, 0, Math.PI / 2]}>
           <cylinderGeometry args={[0.026, 0.026, 0.82, 16]} />
-          <meshStandardMaterial color="#DFBA78" metalness={0.9} roughness={0.2} />
+          <meshStandardMaterial color="#E0BA6A" metalness={0.92} roughness={0.18} />
         </mesh>
       </group>
 
@@ -184,7 +202,7 @@ export const DrawerMesh: React.FC<DrawerMeshProps> = ({
       <group position={[1.45, 0.06, 0.1]}>
         <mesh rotation={[Math.PI / 2, 0, 0]}>
           <cylinderGeometry args={[0.06, 0.06, 0.015, 16]} />
-          <meshStandardMaterial color="#C8A265" metalness={0.85} roughness={0.3} />
+          <meshStandardMaterial color="#C8A265" metalness={0.88} roughness={0.25} />
         </mesh>
         {/* Keyhole slot */}
         <mesh position={[0, -0.01, 0.01]}>
@@ -193,43 +211,10 @@ export const DrawerMesh: React.FC<DrawerMeshProps> = ({
         </mesh>
       </group>
 
-      {/* 3D Floating Deadline Urgency Pill (Visible from distance) */}
-      <Html
-        position={[-1.35, 0.06, 0.15]}
-        center
-        distanceFactor={7.5}
-        style={{ pointerEvents: 'none' }}
-      >
-        <div className={`px-2 py-0.5 rounded-full text-[10px] font-sans font-bold flex items-center space-x-1 shadow-lg border whitespace-nowrap backdrop-blur-sm ${
-          isUrgent
-            ? 'bg-red-950/90 text-signal-red border-signal-red animate-pulse'
-            : isAmber
-            ? 'bg-amber-950/90 text-amber-300 border-amber-600'
-            : 'bg-slate-900/90 text-slate-300 border-slate-700'
-        }`}>
-          {isUrgent ? (
-            <>
-              <AlertCircle className="w-2.5 h-2.5 inline" />
-              <span>{summary.nearest_deadline_days !== null ? `${summary.nearest_deadline_days}d left` : 'Urgent'}</span>
-            </>
-          ) : isAmber ? (
-            <>
-              <Clock className="w-2.5 h-2.5 inline" />
-              <span>{summary.nearest_deadline_days}d left</span>
-            </>
-          ) : (
-            <>
-              <ShieldCheck className="w-2.5 h-2.5 inline text-emerald-400" />
-              <span>Safe</span>
-            </>
-          )}
-        </div>
-      </Html>
-
       {/* Drawer Interior Box (Visible when pulled open) */}
       <mesh position={[0, -0.05, -drawerDepth / 2 + 0.05]}>
         <boxGeometry args={[drawerWidth - 0.15, drawerHeight - 0.1, drawerDepth]} />
-        <meshStandardMaterial color="#2E1C10" roughness={0.85} />
+        <meshStandardMaterial color="#321E12" roughness={0.82} />
       </mesh>
 
       {/* Inside Drawer: Physical Paper Filing Folders & Document Tabs */}
@@ -264,8 +249,8 @@ export const DrawerMesh: React.FC<DrawerMeshProps> = ({
                   position={[0, 0.1, 0]}
                 >
                   <meshStandardMaterial
-                    color={isDocHovered ? '#FAF5EB' : '#F1ECE2'}
-                    roughness={0.7}
+                    color={isDocHovered ? '#FFFFFF' : '#FAF6ED'}
+                    roughness={0.65}
                   />
                 </RoundedBox>
 
@@ -277,29 +262,10 @@ export const DrawerMesh: React.FC<DrawerMeshProps> = ({
                   position={[-0.2 + (docIdx % 2) * 0.4, 0.32, 0]}
                 >
                   <meshStandardMaterial
-                    color={docUrgent ? '#C8453B' : docAmber ? '#E0A13A' : '#7D8C9E'}
-                    roughness={0.5}
+                    color={docUrgent ? '#DC2626' : docAmber ? '#D97706' : '#059669'}
+                    roughness={0.4}
                   />
                 </RoundedBox>
-
-                {/* Interactive Folder Label HTML Tooltip */}
-                <Html
-                  position={[0, 0.45, 0.05]}
-                  center
-                  distanceFactor={6.5}
-                  style={{ pointerEvents: 'none' }}
-                >
-                  <div className={`px-2 py-1 rounded shadow-xl text-[10px] font-sans transition-transform ${
-                    isDocHovered ? 'scale-105 bg-slate-900 border border-brass text-paper-light z-30' : 'bg-slate-950/80 border border-slate-800 text-slate-300'
-                  }`}>
-                    <div className="font-serif font-bold truncate max-w-[140px]">
-                      {doc.confirmed_document_type}
-                    </div>
-                    <div className="text-[9px] text-slate-400">
-                      {doc.confirmed_expiry_date ? `Due: ${doc.confirmed_expiry_date}` : 'Permanent'}
-                    </div>
-                  </div>
-                </Html>
               </group>
             );
           })}

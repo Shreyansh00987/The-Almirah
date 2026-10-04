@@ -67,29 +67,33 @@
   --font-source-serif: 'Source Serif 4', Georgia, serif;
   --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   
-  --bg-slate-deep: #12151A;
-  --bg-slate-panel: #1B2028;
-  --bg-slate-elevated: #242A35;
-  --border-slate: #2E3644;
+  /* Luminous Warm Archival Palette */
+  --bg-parchment: #F7F5EF;
+  --bg-parchment-warm: #EFECE3;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #FAF8F4;
+  --border-parchment: #E2DDD3;
+  --border-parchment-subtle: #EBE6DC;
   
-  --walnut-dark: #4A3323;
-  --walnut-warm: #6B4A33;
-  --walnut-highlight: #8B6143;
-  --brass: #C8A265;
+  --ink-primary: #1C1917;
+  --ink-secondary: #44403C;
+  --ink-muted: #78716C;
   
-  --paper-parchment: #F1ECE2;
-  --paper-light: #FBF9F5;
-  --paper-ink: #1F242C;
-  --paper-muted: #545D6E;
+  --walnut-deep: #3E2414;
+  --walnut-warm: #5A3822;
+  --walnut-caramel: #7A4E31;
+  --brass: #B48226;
+  --brass-light: #D4AF37;
+  --brass-subtle: #F6EAC9;
   
-  --urgency-calm: #5A677D;
-  --urgency-amber: #E0A13A;
-  --urgency-red: #C8453B;
+  --urgency-calm: #475569;
+  --urgency-amber: #B45309;
+  --urgency-red: #B91C1C;
 }
 
 html, body {
-  background-color: var(--bg-slate-deep);
-  color: var(--paper-parchment);
+  background-color: var(--bg-parchment);
+  color: var(--ink-primary);
   font-family: var(--font-inter);
   margin: 0;
   padding: 0;
@@ -98,42 +102,44 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Wood Grain Texture Overlay (CSS SVG gradient pattern) */
-.wood-texture {
-  background-color: #6B4A33;
-  background-image: linear-gradient(90deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.08) 50%, rgba(255,255,255,0.02) 100%),
-                    repeating-linear-gradient(180deg, transparent 0, transparent 4px, rgba(0,0,0,0.04) 4px, rgba(0,0,0,0.04) 8px);
+/* Warm Parchment Card Styling */
+.parchment-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-parchment);
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(44, 34, 24, 0.05);
 }
 
-.slate-card {
-  background-color: #171B21;
-  border: 1px solid #2E3644;
-  border-radius: 0.5rem;
+.wood-card {
+  background-color: #5A3822;
+  color: #FAF7F2;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(62, 36, 20, 0.15);
 }
 
 /* High contrast focus ring for elder accessibility */
 :focus-visible {
-  outline: 3px solid #E0A13A;
+  outline: 3px solid #B48226;
   outline-offset: 2px;
 }
 
-/* Custom sleek dark scrollbar */
+/* Clean tactile scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #12151A;
+  background: #EFECE3;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2E3644;
+  background: #D4CDBC;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #455064;
+  background: #B8AF9B;
 }
 
 /* Reduced motion preference */

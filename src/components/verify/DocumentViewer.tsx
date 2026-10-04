@@ -34,15 +34,15 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
   ];
 
   return (
-    <div className="flex flex-col h-full bg-slate-950 rounded-lg border border-slate-800 overflow-hidden shadow-xl">
+    <div className="flex flex-col h-full bg-white rounded-2xl border border-[#E2DDD3] overflow-hidden shadow-xs">
       {/* Viewer Header / Toolbar */}
-      <div className="flex items-center justify-between px-4 py-2.5 bg-slate-900 border-b border-slate-800 text-xs text-slate-300">
+      <div className="flex items-center justify-between px-4 py-2.5 bg-[#FAF8F5] border-b border-[#E2DDD3] text-xs text-stone-700">
         <div className="flex items-center space-x-2">
-          <span className="font-serif font-medium text-paper-parchment text-sm">
+          <span className="font-serif font-bold text-stone-900 text-sm">
             {doc.filename}
           </span>
           {doc.is_synthetic && (
-            <span className="bg-amber-900/60 text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded border border-amber-700">
+            <span className="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full border border-amber-300">
               Synthetic sample
             </span>
           )}
@@ -52,16 +52,16 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
         <div className="flex items-center space-x-1">
           <button 
             onClick={handleZoomOut}
-            className="p-1.5 hover:bg-slate-800 text-slate-300 rounded focus:ring-1 focus:ring-amber-500"
+            className="p-1.5 hover:bg-stone-200 text-stone-700 rounded-lg cursor-pointer"
             title="Zoom Out"
             aria-label="Zoom Out"
           >
             <ZoomOut className="w-4 h-4" />
           </button>
-          <span className="px-2 font-mono text-[11px]">{Math.round(zoom * 100)}%</span>
+          <span className="px-2 font-mono text-[11px] text-stone-800 font-bold">{Math.round(zoom * 100)}%</span>
           <button 
             onClick={handleZoomIn}
-            className="p-1.5 hover:bg-slate-800 text-slate-300 rounded focus:ring-1 focus:ring-amber-500"
+            className="p-1.5 hover:bg-stone-200 text-stone-700 rounded-lg cursor-pointer"
             title="Zoom In"
             aria-label="Zoom In"
           >
@@ -69,7 +69,7 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
           </button>
           <button 
             onClick={handleReset}
-            className="p-1.5 hover:bg-slate-800 text-slate-300 rounded focus:ring-1 focus:ring-amber-500"
+            className="p-1.5 hover:bg-stone-200 text-stone-700 rounded-lg cursor-pointer"
             title="Reset Zoom"
             aria-label="Reset Zoom"
           >
@@ -81,10 +81,10 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
       {/* Canvas Viewport with Bounding Boxes */}
       <div 
         ref={containerRef}
-        className="flex-1 overflow-auto p-4 flex items-center justify-center bg-slate-950/80 relative"
+        className="flex-1 overflow-auto p-4 flex items-center justify-center bg-[#EFECE6] relative"
       >
         <div 
-          className="relative shadow-2xl transition-transform duration-200 origin-center bg-paper-parchment"
+          className="relative shadow-md transition-transform duration-200 origin-center bg-white p-2 rounded-lg"
           style={{ transform: `scale(${zoom})` }}
         >
           {/* Document Scan Image */}
@@ -112,10 +112,10 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
                 onClick={() => onSelectBox?.(fb.key)}
                 className={`absolute cursor-pointer transition-all duration-200 rounded ${
                   isActive
-                    ? 'border-2 border-brass bg-brass/25 ring-4 ring-amber-400/40 z-30 shadow-lg'
+                    ? 'border-2 border-[#B48226] bg-[#B48226]/30 ring-4 ring-amber-400/50 z-30 shadow-md'
                     : isLowConf
-                    ? 'border border-dashed border-signal-red/80 bg-signal-red/10 hover:border-signal-red hover:bg-signal-red/20 z-10'
-                    : 'border border-slate-700/60 bg-slate-700/10 hover:border-brass/80 hover:bg-brass/15 z-10'
+                    ? 'border border-dashed border-red-500 bg-red-500/15 hover:bg-red-500/25 z-10'
+                    : 'border border-stone-400/80 bg-stone-500/10 hover:border-[#B48226] hover:bg-[#B48226]/20 z-10'
                 }`}
                 style={{
                   top: `${topPct}%`,
@@ -125,12 +125,12 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
                 }}
               >
                 {isActive && (
-                  <div className="absolute -top-6 left-0 bg-slate-900 border border-brass text-paper-light text-[10px] font-sans font-semibold px-2 py-0.5 rounded shadow whitespace-nowrap z-40">
+                  <div className="absolute -top-6 left-0 bg-[#5A3822] text-[#FAF7F2] text-[10px] font-sans font-bold px-2 py-0.5 rounded shadow whitespace-nowrap z-40">
                     {fb.label} ({Math.round(fb.conf * 100)}%)
                   </div>
                 )}
                 {!isActive && isLowConf && (
-                  <div className="absolute -top-5 right-0 bg-signal-red text-white text-[9px] font-bold px-1 rounded flex items-center shadow">
+                  <div className="absolute -top-5 right-0 bg-red-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded flex items-center shadow">
                     <AlertTriangle className="w-2.5 h-2.5 mr-0.5" />
                     Verify
                   </div>
@@ -141,9 +141,9 @@ export const DocumentViewer: React.FC<DocumentViewerProps> = ({
         </div>
       </div>
 
-      <div className="px-4 py-2 bg-slate-900/90 border-t border-slate-800 text-[11px] text-slate-400 flex items-center justify-between">
+      <div className="px-4 py-2 bg-[#FAF8F5] border-t border-[#E2DDD3] text-[11px] text-stone-600 flex items-center justify-between">
         <span>Hover any field on the right to inspect its origin region.</span>
-        <span className="text-slate-500 font-mono">Normalized Space (1000x1000)</span>
+        <span className="text-stone-500 font-mono">Normalized Space (1000x1000)</span>
       </div>
     </div>
   );

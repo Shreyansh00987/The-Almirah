@@ -23,41 +23,41 @@ export const DocumentModal: React.FC<DocumentModalProps> = ({
 
   return (
     <div 
-      className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 animate-fadeIn"
+      className="fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 animate-fadeIn"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-doc-title"
     >
-      <div className="bg-slate-900 border border-slate-700 rounded-xl shadow-2xl max-w-5xl w-full max-h-[92vh] flex flex-col overflow-hidden">
+      <div className="bg-white border border-[#E2DDD3] rounded-2xl shadow-2xl max-w-5xl w-full max-h-[92vh] flex flex-col overflow-hidden text-stone-800">
         {/* Modal Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-950/60">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#E2DDD3] bg-[#FAF8F5]">
           <div className="space-y-0.5">
             <div className="flex items-center space-x-2">
-              <h3 id="modal-doc-title" className="font-serif text-xl font-bold text-paper-light">
+              <h3 id="modal-doc-title" className="font-serif text-xl font-bold text-stone-900">
                 {doc.confirmed_document_type}
               </h3>
               {doc.is_synthetic && (
-                <span className="text-[10px] bg-amber-950/80 text-amber-300 font-bold px-2 py-0.5 rounded border border-amber-700">
+                <span className="text-[10px] bg-amber-50 text-amber-800 font-bold px-2 py-0.5 rounded-full border border-amber-300">
                   Synthetic sample
                 </span>
               )}
             </div>
-            <p className="text-xs text-slate-400">
-              Cabinet Drawer: <strong className="text-brass">{doc.confirmed_drawer}</strong> · ID: <span className="font-mono text-slate-300">{doc.confirmed_identifier}</span>
+            <p className="text-xs text-stone-500">
+              Cabinet Drawer: <strong className="text-[#5A3822]">{doc.confirmed_drawer}</strong> · ID: <span className="font-mono text-stone-700 font-semibold">{doc.confirmed_identifier}</span>
             </p>
           </div>
 
           <div className="flex items-center space-x-3">
             <Link
               href={`/verify?id=${doc.id}`}
-              className="text-xs px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-paper-light border border-slate-600 flex items-center space-x-1.5 transition-colors"
+              className="text-xs px-3 py-1.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-800 border border-stone-300 flex items-center space-x-1.5 transition-colors font-medium shadow-xs"
             >
-              <ExternalLink className="w-3.5 h-3.5 text-brass" />
+              <ExternalLink className="w-3.5 h-3.5 text-[#B48226]" />
               <span>Verify / Edit</span>
             </Link>
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors focus:ring-2 focus:ring-amber-500"
+              className="p-1.5 rounded-lg text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition-colors cursor-pointer"
               aria-label="Close document modal"
             >
               <X className="w-5 h-5" />
@@ -68,17 +68,17 @@ export const DocumentModal: React.FC<DocumentModalProps> = ({
         {/* Modal Body: Split View */}
         <div className="grid grid-cols-1 md:grid-cols-12 flex-1 overflow-hidden">
           {/* Document Scan View */}
-          <div className="md:col-span-7 bg-slate-950 p-4 flex items-center justify-center overflow-auto border-r border-slate-800">
-            <div className="relative shadow-2xl rounded max-h-[680px]">
+          <div className="md:col-span-7 bg-[#EFECE6] p-4 flex items-center justify-center overflow-auto border-r border-[#E2DDD3]">
+            <div className="relative shadow-md rounded-lg max-h-[680px] bg-white p-2">
               <img
                 src={doc.image_url || `/synthetic/${doc.filename}`}
                 alt={doc.confirmed_document_type || doc.filename}
-                className="max-h-[660px] w-auto block rounded select-none shadow"
+                className="max-h-[640px] w-auto block rounded select-none"
               />
               {/* Highlight specific bounding box if provided */}
               {highlightField && doc.extraction && (doc.extraction as any)[highlightField]?.bounding_box && (
                 <div
-                  className="absolute border-2 border-brass bg-brass/30 ring-4 ring-amber-400/50 rounded pointer-events-none animate-pulse"
+                  className="absolute border-2 border-[#B48226] bg-[#B48226]/20 ring-4 ring-amber-400/40 rounded pointer-events-none animate-pulse"
                   style={{
                     top: `${((doc.extraction as any)[highlightField].bounding_box.ymin / 1000) * 100}%`,
                     left: `${((doc.extraction as any)[highlightField].bounding_box.xmin / 1000) * 100}%`,
@@ -91,22 +91,22 @@ export const DocumentModal: React.FC<DocumentModalProps> = ({
           </div>
 
           {/* Verified Metadata Panel */}
-          <div className="md:col-span-5 p-6 bg-slate-900 overflow-y-auto space-y-5">
+          <div className="md:col-span-5 p-6 bg-white overflow-y-auto space-y-4">
             {/* Urgency Status Banner */}
-            <div className={`p-4 rounded-lg border ${
+            <div className={`p-4 rounded-xl border ${
               isRed 
-                ? 'bg-red-950/60 border-signal-red text-red-200' 
+                ? 'bg-red-50 border-red-200 text-red-800' 
                 : isAmber
-                ? 'bg-amber-950/60 border-amber-600 text-amber-200'
-                : 'bg-slate-800/80 border-slate-700 text-slate-300'
+                ? 'bg-amber-50 border-amber-200 text-amber-900'
+                : 'bg-emerald-50 border-emerald-200 text-emerald-900'
             }`}>
               <div className="flex items-center space-x-2 font-bold text-sm">
                 {isRed ? (
-                  <AlertCircle className="w-4 h-4 text-signal-red" />
+                  <AlertCircle className="w-4 h-4 text-red-600" />
                 ) : isAmber ? (
-                  <Calendar className="w-4 h-4 text-amber-400" />
+                  <Calendar className="w-4 h-4 text-amber-600" />
                 ) : (
-                  <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                  <ShieldCheck className="w-4 h-4 text-emerald-600" />
                 )}
                 <span>
                   {doc.confirmed_expiry_date 
@@ -124,59 +124,59 @@ export const DocumentModal: React.FC<DocumentModalProps> = ({
             </div>
 
             {/* Fact List */}
-            <div className="space-y-3.5 text-xs">
-              <div className="p-3 bg-slate-950/60 rounded border border-slate-800">
-                <span className="text-slate-400 uppercase tracking-wider text-[10px] font-semibold block mb-0.5">
+            <div className="space-y-3 text-xs">
+              <div className="p-3 bg-[#FAF8F4] rounded-xl border border-[#E2DDD3]">
+                <span className="text-stone-500 uppercase tracking-wider text-[10px] font-semibold block mb-0.5">
                   Authority / Provider
                 </span>
-                <span className="text-paper-light font-medium text-sm">
+                <span className="text-stone-900 font-semibold text-sm">
                   {doc.confirmed_provider}
                 </span>
               </div>
 
-              <div className="p-3 bg-slate-950/60 rounded border border-slate-800">
-                <span className="text-slate-400 uppercase tracking-wider text-[10px] font-semibold block mb-0.5">
+              <div className="p-3 bg-[#FAF8F4] rounded-xl border border-[#E2DDD3]">
+                <span className="text-stone-500 uppercase tracking-wider text-[10px] font-semibold block mb-0.5">
                   Identifier / Policy No.
                 </span>
-                <span className="text-brass font-mono font-bold text-sm">
+                <span className="text-[#5A3822] font-mono font-bold text-sm">
                   {doc.confirmed_identifier}
                 </span>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <div className="p-3 bg-slate-950/60 rounded border border-slate-800">
-                  <span className="text-slate-400 uppercase tracking-wider text-[10px] font-semibold block mb-0.5">
+                <div className="p-3 bg-[#FAF8F4] rounded-xl border border-[#E2DDD3]">
+                  <span className="text-stone-500 uppercase tracking-wider text-[10px] font-semibold block mb-0.5">
                     Issue Date
                   </span>
-                  <span className="text-slate-200 font-medium">
+                  <span className="text-stone-800 font-medium">
                     {doc.confirmed_issue_date || 'N/A'}
                   </span>
                 </div>
-                <div className="p-3 bg-slate-950/60 rounded border border-slate-800">
-                  <span className="text-slate-400 uppercase tracking-wider text-[10px] font-semibold block mb-0.5">
+                <div className="p-3 bg-[#FAF8F4] rounded-xl border border-[#E2DDD3]">
+                  <span className="text-stone-500 uppercase tracking-wider text-[10px] font-semibold block mb-0.5">
                     Amount / Fee
                   </span>
-                  <span className="text-slate-200 font-medium">
+                  <span className="text-stone-800 font-medium">
                     {doc.confirmed_amount || 'N/A'}
                   </span>
                 </div>
               </div>
 
               {doc.notes && (
-                <div className="p-3 bg-slate-950/60 rounded border border-slate-800">
-                  <span className="text-slate-400 uppercase tracking-wider text-[10px] font-semibold block mb-0.5">
+                <div className="p-3 bg-[#FAF8F4] rounded-xl border border-[#E2DDD3]">
+                  <span className="text-stone-500 uppercase tracking-wider text-[10px] font-semibold block mb-0.5">
                     Filing Memorandum
                   </span>
-                  <p className="text-slate-300 leading-relaxed">
+                  <p className="text-stone-600 leading-relaxed">
                     {doc.notes}
                   </p>
                 </div>
               )}
             </div>
 
-            <div className="text-[11px] text-slate-500 pt-2 border-t border-slate-800">
-              <span>SHA-256: </span>
-              <code className="font-mono text-slate-400">{doc.checksum}</code>
+            <div className="text-[11px] text-stone-500 pt-2 border-t border-[#E2DDD3]">
+              <span>SHA-256 Checksum: </span>
+              <code className="font-mono text-stone-700 font-semibold">{doc.checksum.substring(0, 24)}...</code>
             </div>
           </div>
         </div>
